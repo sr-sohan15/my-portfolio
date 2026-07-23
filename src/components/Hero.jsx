@@ -2,8 +2,9 @@ import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import Typewriter from 'typewriter-effect';
 import { motion } from 'framer-motion';
-
+import { useState } from 'react';
 const Hero = () => {
+  const [isImageActive, setIsImageActive] = useState(false);
   return (
     <section id="about" className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen flex items-center relative overflow-hidden">
       {/* Background Glow */}
@@ -75,12 +76,15 @@ const Hero = () => {
             <div className="absolute -inset-1 bg-gradient-to-r from-sky-500 to-blue-600 rounded-2xl blur opacity-30 group-hover:opacity-80 transition duration-500"></div>
             
          <div className="relative w-64 h-64 sm:w-80 sm:h-80 bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden flex flex-col items-center justify-center p-2 group-hover:scale-[1.02] transition duration-300">
-  <img 
-    src={`${import.meta.env.BASE_URL}sohan.jpeg`} 
-    alt="Md. Saidur Rahman Sohan" 
-    className="w-full h-full object-cover rounded-xl grayscale group-hover:grayscale-0 transition duration-500"
-  />
-</div>
+        <img 
+          src={`${import.meta.env.BASE_URL}sohan.jpeg`} 
+          alt="Md. Saidur Rahman Sohan" 
+          onClick={() => setIsImageActive(!isImageActive)}
+          className={`w-full h-full object-cover rounded-xl transition duration-500 cursor-pointer ${
+            isImageActive ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'
+          }`}
+        />
+      </div>
           </div>
         </motion.div>
 
