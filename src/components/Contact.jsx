@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Mail, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, Send, CheckCircle2, PhoneCall } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
@@ -13,13 +13,13 @@ const Contact = () => {
     setLoading(true);
     setError(false);
 
-    // EmailJS দিয়ে ইমেইল পাঠানো
+    // EmailJS দিয়ে ইমেইল পাঠানো
     emailjs
       .sendForm(
-        'YOUR_SERVICE_ID',   // 👈 EmailJS থেকে পাওয়া Service ID
-        'YOUR_TEMPLATE_ID',  // 👈 EmailJS থেকে পাওয়া Template ID
+        'YOUR_SERVICE_ID',   // 👈 EmailJS থেকে পাওয়া Service ID
+        'YOUR_TEMPLATE_ID',  // 👈 EmailJS থেকে পাওয়া Template ID
         formRef.current,
-        'YOUR_PUBLIC_KEY'    // 👈 EmailJS থেকে পাওয়া Public Key
+        'YOUR_PUBLIC_KEY'    // 👈 EmailJS থেকে পাওয়া Public Key
       )
       .then(
         () => {
@@ -51,11 +51,25 @@ const Contact = () => {
             I am currently looking for <span className="text-sky-400 font-medium">Internship</span> or <span className="text-sky-400 font-medium">Junior Frontend Developer</span> opportunities. Feel free to reach out if you have a project or a position available!
           </p>
 
+          {/* Direct Email Card */}
           <div className="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-2">
             <span className="text-xs text-slate-500 font-mono block">Direct Email</span>
-            {/* ডামি ইমেইল বদলে আসল জিমেইল দেওয়া হয়েছে */}
-            <a href="mailto:sr.sohan5187@gmail.com" className="text-slate-200 hover:text-sky-400 font-mono text-sm transition">
+            <a href="mailto:sr.sohan5187@gmail.com" className="text-slate-200 hover:text-sky-400 font-mono text-sm transition block">
               sr.sohan5187@gmail.com
+            </a>
+          </div>
+
+          {/* WhatsApp / Emergency Contact Card */}
+          <div className="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-2">
+            <span className="text-xs text-slate-500 font-mono block">WhatsApp (Emergency)</span>
+            <a 
+              href="https://wa.me/8801724247815" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-slate-200 hover:text-emerald-400 font-mono text-sm transition flex items-center gap-2"
+            >
+              <PhoneCall size={16} className="text-emerald-400" />
+              +880 1724-247815
             </a>
           </div>
         </div>
@@ -99,7 +113,7 @@ const Contact = () => {
           <button 
             type="submit" 
             disabled={loading}
-            className="w-full sm:w-auto px-6 py-3 bg-sky-500 hover:bg-sky-600 disabled:bg-slate-700 text-white font-medium text-sm rounded-lg transition flex items-center justify-center gap-2 shadow-lg shadow-sky-500/20 active:scale-95"
+            className="w-full sm:w-auto px-6 py-3 bg-sky-500 hover:bg-sky-600 disabled:bg-slate-700 text-white font-medium text-sm rounded-lg transition flex items-center justify-center gap-2 shadow-lg shadow-sky-500/20 active:scale-95 cursor-pointer"
           >
             {loading ? "Sending..." : "Send Message"} <Send size={16} />
           </button>
