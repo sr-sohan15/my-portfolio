@@ -74,13 +74,13 @@ const Hero = () => {
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-sky-500 to-blue-600 rounded-2xl blur opacity-30 group-hover:opacity-80 transition duration-500"></div>
             
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden flex flex-col items-center justify-center p-2 group-hover:scale-[1.02] transition duration-300">
-              <img 
-                src="/sohan.jpeg" 
-                alt="Md. Saidur Rahman Sohan" 
-                className="w-full h-full object-cover rounded-xl grayscale group-hover:grayscale-0 transition duration-500"
-              />
-            </div>
+         <div className="relative w-64 h-64 sm:w-80 sm:h-80 bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden flex flex-col items-center justify-center p-2 group-hover:scale-[1.02] transition duration-300">
+  <img 
+    src={`${import.meta.env.BASE_URL}sohan.jpeg`} 
+    alt="Md. Saidur Rahman Sohan" 
+    className="w-full h-full object-cover rounded-xl grayscale group-hover:grayscale-0 transition duration-500"
+  />
+</div>
           </div>
         </motion.div>
 
