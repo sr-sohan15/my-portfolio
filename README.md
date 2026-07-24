@@ -1,16 +1,40 @@
-# React + Vite
+# 🚀 Personal Portfolio Website | Md. Saidur Rahman Sohan
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Welcome to my personal portfolio repository! This is a modern, responsive, and highly interactive portfolio web application built with **React.js**, **Tailwind CSS**, and **Framer Motion**. It features a dynamic interactive particle canvas background, smooth theme switching (Light / Dark Mode), and interactive component architecture.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌟 Key Features
 
-## React Compiler
+* **🌗 Seamless Theme Switching (Day & Night Mode):** Fully custom light and dark themes optimized with tailored components for pixel-perfect readability and contrast.
+* **🎨 Dynamic Interactive Background:** Particle network canvas with real-time mouse-tracking glow and physical repulsion effects.
+* **📱 Fully Responsive Layout:** Designed with a mobile-first approach, offering seamless viewing across desktop, tablet, and mobile displays.
+* **⚡ Component-Driven Architecture:** Clean, modular React code structure with reusable UI cards and smooth animations using Framer Motion.
+* **📬 Working Contact Form:** Integrated contact section for direct inquiries and networking.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+* **Frontend Framework:** React.js (Vite)
+* **Styling:** Tailwind CSS
+* **Animations:** Framer Motion, Canvas API (HTML5)
+* **Icons:** Lucide React
+* **Hosting / Deployment:** GitHub Pages / Vercel
+
+---
+
+## 📂 Project Structure
+
+```text
+src/
+├── components/
+│   ├── Navbar.jsx / NavbarLight.jsx       # Header & Navigation
+│   ├── Hero.jsx / HeroLight.jsx           # Hero Section with 3D Tilt Card
+│   ├── Skills.jsx / SkillsLight.jsx       # Technical Skills & Expertise
+│   ├── Projects.jsx / ProjectsLight.jsx   # Featured Projects Showcase
+│   ├── Research.jsx / ResearchLight.jsx   # Academic Papers & Research
+│   ├── Contact.jsx / ContactLight.jsx     # Contact Form & Direct Links
+│   └── ThemeConfigurator.jsx              # Theme Toggle Switch
+├── App.jsx                                 # Root Application & Canvas Setup
+└── main.jsx                                # Application Entry Point
