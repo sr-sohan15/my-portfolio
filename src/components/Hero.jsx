@@ -102,7 +102,7 @@ export default function Hero() {
 
         </div>
 
-        {/* 👉 ছবির সেকশন */}
+        {/* 👉 ছবির সেকশন (মাউস/টাচে ব্ল্যাক-অ্যান্ড-হোয়াইট থেকে ফুল কালারফুল হবে) */}
         <div className="lg:col-span-5 flex justify-center lg:justify-end order-2">
           <div 
             ref={cardRef}
@@ -112,12 +112,12 @@ export default function Hero() {
               transform: `perspective(1000px) rotateX(${cardTilt.rx}deg) rotateY(${cardTilt.ry}deg)`,
               transition: cardTilt.rx === 0 ? 'transform 0.5s ease-out' : 'none'
             }}
-            className="relative w-[200px] sm:w-[240px] aspect-[4/5] rounded-2xl overflow-hidden border-2 border-slate-800 bg-slate-900 shadow-2xl transition-all duration-300 cursor-pointer"
+            className="relative group w-[200px] sm:w-[240px] aspect-[4/5] rounded-2xl overflow-hidden border-2 border-slate-800 hover:border-sky-500/60 bg-slate-900 shadow-2xl transition-all duration-300 cursor-pointer"
           >
             <img 
               src={`${import.meta.env.BASE_URL}sohan.jpeg`} 
               alt="Md. Saidur Rahman Sohan" 
-              className="w-full h-full object-cover object-center grayscale contrast-125"
+              className="w-full h-full object-cover object-center grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-500"
             />
           </div>
         </div>
