@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 export default function Hero() {
   const [cardTilt, setCardTilt] = useState({ rx: 0, ry: 0 });
+  const [isHovered, setIsHovered] = useState(false); // 🎯 ইমেজের রঙিন কালার স্টেট
   const cardRef = useRef(null);
 
   const roles = [
@@ -51,6 +52,7 @@ export default function Hero() {
 
   const handleCardMouseLeave = () => {
     setCardTilt({ rx: 0, ry: 0 });
+    setIsHovered(false);
   };
 
   return (
@@ -102,22 +104,29 @@ export default function Hero() {
 
         </div>
 
-        {/* 👉 ছবির সেকশন (মাউস/টাচে ব্ল্যাক-অ্যান্ড-হোয়াইট থেকে ফুল কালারফুল হবে) */}
+        {/* 👉 ছবির সেকশন (মাউস/টাচ করলে শতভাগ কালারফুল হবে) */}
         <div className="lg:col-span-5 flex justify-center lg:justify-end order-2">
           <div 
             ref={cardRef}
+            onMouseEnter={() => setIsHovered(true)}
             onMouseMove={handleCardMouseMove}
             onMouseLeave={handleCardMouseLeave}
+            onTouchStart={() => setIsHovered(true)}
             style={{
               transform: `perspective(1000px) rotateX(${cardTilt.rx}deg) rotateY(${cardTilt.ry}deg)`,
               transition: cardTilt.rx === 0 ? 'transform 0.5s ease-out' : 'none'
             }}
-            className="relative group w-[200px] sm:w-[240px] aspect-[4/5] rounded-2xl overflow-hidden border-2 border-slate-800 hover:border-sky-500/60 bg-slate-900 shadow-2xl transition-all duration-300 cursor-pointer"
+            className="relative w-[200px] sm:w-[240px] aspect-[4/5] rounded-2xl overflow-hidden border-2 border-slate-800 hover:border-sky-500/60 bg-slate-900 shadow-2xl transition-all duration-300 cursor-pointer"
           >
             <img 
               src={`${import.meta.env.BASE_URL}sohan.jpeg`} 
               alt="Md. Saidur Rahman Sohan" 
-              className="w-full h-full object-cover object-center grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-500"
+              style={{
+                filter: isHovered ? 'grayscale(0%) contrast(100%)' : 'grayscale(100%) contrast(125%)',
+                WebkitFilter: isHovered ? 'grayscale(0%) contrast(100%)' : 'grayscale(100%) contrast(125%)',
+                transition: 'filter 0.5s ease, transform 0.5s ease'
+              }}
+              className="w-full h-full object-cover object-center"
             />
           </div>
         </div>
