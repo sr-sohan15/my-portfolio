@@ -8,45 +8,48 @@ const navLinks = [
   { name: 'Research', href: '#research' },
 ];
 
-const Navbar = () => {
+const NavbarLight = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <nav className="fixed top-0 w-full bg-[#0b0f19]/80 dark:bg-[#0b0f19]/80 backdrop-blur-md border-b border-slate-800/80 z-50 px-6 py-4">
+    <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-slate-200 z-50 px-6 py-4 shadow-sm transition-colors duration-300">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         
+        {/* 🌟 লোগো (ডে-মোড) */}
         <a href="#about" className="group focus:outline-none">
-          <span className="text-xl font-bold font-mono tracking-tight text-sky-400">
-            sohan<span className="text-slate-200">.dev</span>
+          <span className="text-xl font-black font-mono tracking-tight text-sky-600">
+            sohan<span className="text-slate-900">.dev</span>
           </span>
         </a>
 
-        <div className="hidden md:flex items-center gap-2 text-sm font-medium font-mono text-slate-400">
+        {/* 🔗 নেভিগেশন লিঙ্কসমূহ (স্পষ্ট ও ডার্ক টেক্সট) */}
+        <div className="hidden md:flex items-center gap-2 text-sm font-bold font-mono text-slate-700">
           {navLinks.map((link, index) => (
             <a
               key={link.name}
               href={link.href}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
-              className="relative px-4 py-2 hover:text-sky-300 transition-colors duration-200 z-10"
+              className="relative px-4 py-2 hover:text-sky-600 transition-colors duration-200 z-10"
             >
               {hoveredIndex === index && (
                 <motion.span
-                  layoutId="hoverBackground"
+                  layoutId="hoverBackgroundLight"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ type: "spring", bounce: 0.25, duration: 0.4 }}
-                  className="absolute inset-0 bg-sky-500/10 border border-sky-500/20 rounded-lg -z-10"
+                  className="absolute inset-0 bg-sky-100 border border-sky-300/60 rounded-lg -z-10"
                 />
               )}
               {link.name}
             </a>
           ))}
 
+          {/* 🔘 কন্টাক্ট বাটন */}
           <a 
             href="#contact" 
-            className="ml-3 px-4 py-1.5 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 hover:bg-sky-500 hover:text-white transition-all duration-300 text-xs font-semibold"
+            className="ml-3 px-4 py-1.5 rounded-lg bg-sky-600 text-white hover:bg-sky-500 transition-all duration-300 text-xs font-bold shadow-sm"
           >
             Contact
           </a>
@@ -57,4 +60,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavbarLight;
