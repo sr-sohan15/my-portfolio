@@ -8,13 +8,18 @@ import SkillsLight from './components/SkillsLight';
 import Projects from './components/Projects';
 import ProjectsLight from './components/ProjectsLight';
 import Research from './components/Research';
-import ResearchLight from './components/ResearchLight'; // 👈 রিসার্চ লাইট ইম্পোর্ট
+import ResearchLight from './components/ResearchLight'; 
 import Contact from './components/Contact';
 import ContactLight from './components/ContactLight';
 import ThemeConfigurator from './components/ThemeConfigurator';
 
+// 🔴 ১. আবার তৈরি করা ResumeModal টি ইম্পোর্ট করা হলো
+import ResumeModal from './components/ResumeModal';
+
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isResumeOpen, setIsResumeOpen] = useState(false); 
+
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const canvasRef = useRef(null);
 
@@ -150,17 +155,31 @@ function App() {
 
       {/* 🚀 পোর্টফোলিও কন্টেন্ট */}
       <div className="relative z-10 space-y-4">
-        {isDarkMode ? <Navbar /> : <NavbarLight />}
-        {isDarkMode ? <Hero /> : <HeroLight />}
+        {isDarkMode 
+          ? <Navbar onOpenResume={() => setIsResumeOpen(true)} /> 
+          : <NavbarLight onOpenResume={() => setIsResumeOpen(true)} />
+        }
+
+        {isDarkMode 
+          ? <Hero onOpenResume={() => setIsResumeOpen(true)} /> 
+          : <HeroLight onOpenResume={() => setIsResumeOpen(true)} />
+        }
+
         {isDarkMode ? <Skills /> : <SkillsLight />}
         {isDarkMode ? <Projects /> : <ProjectsLight />}
-        
-        {/* 🎯 থিম অনুযায়ী রিসার্চ সেকশন সোয়াপ */}
         {isDarkMode ? <Research /> : <ResearchLight />}
-        
         {isDarkMode ? <Contact /> : <ContactLight />}
+        
         <ThemeConfigurator isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       </div>
+
+      {/* 📄 HD রেজুমে ভিউয়ার মোডাল */}
+      {/* 🔴 ২. মোডাল ট্যাগটি যুক্ত করা হলো */}
+      <ResumeModal 
+        isOpen={isResumeOpen} 
+        onClose={() => setIsResumeOpen(false)} 
+        isDarkMode={isDarkMode}
+      />
 
     </div>
   );
