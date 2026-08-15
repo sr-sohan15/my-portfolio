@@ -24,7 +24,7 @@ const ContactLight = () => {
           <div className="p-4 bg-white/80 border border-slate-200 rounded-xl space-y-2 shadow-sm">
             <span className="text-xs text-slate-500 font-mono font-bold block">Direct Email</span>
             <a href="mailto:sr.sohan5187@gmail.com" className="text-slate-900 hover:text-sky-600 font-mono text-sm font-bold transition block">
-              sr.sohan5187@gmail.com
+              sr.sohan7815@gmail.com
             </a>
           </div>
 
