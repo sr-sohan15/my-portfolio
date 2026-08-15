@@ -101,8 +101,13 @@ const ContactLight = () => {
         </form>
       </div>
 
-      <footer className="pt-16 border-t border-slate-200 text-center text-xs text-slate-600 font-mono font-semibold">
-        © {new Date().getFullYear()} Md. Saidur Rahman Sohan. All rights reserved.
+       <footer className="pt-6 pb-0 mb-0 border-t border-slate-800/80 text-center space-y-1">
+        <p className="text-xs sm:text-sm font-mono text-slate-400">
+          © {new Date().getFullYear()} <span className="text-cyan-400 font-semibold">Md. Saidur Rahman Sohan</span>. All rights reserved.
+        </p>
+        <p className="text-[11px] text-slate-500 font-mono">
+          Designed & Built with React.js & Tailwind CSS
+        </p>
       </footer>
     </section>
   );

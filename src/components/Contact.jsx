@@ -42,7 +42,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-8 md:py-16 px-6 max-w-6xl mx-auto space-y-6 md:space-y-10">
+    <section id="contact" className="pt-6 md:pt-10 pb-6 md:pb-8 px-6 max-w-6xl mx-auto space-y-6 md:space-y-8">
       <div className="space-y-2">
         <div className="flex items-center gap-2 text-sky-400 text-sm font-mono">
           <Mail size={18} /> Get In Touch
@@ -174,8 +174,14 @@ const Contact = () => {
         </form>
       </div>
 
-      <footer className="pt-10 border-t border-slate-800/80 text-center text-xs text-slate-500 font-mono">
-        © {new Date().getFullYear()} Md. Saidur Rahman Sohan. All rights reserved.
+{/* Flush Bottom Footer */}
+      <footer className="pt-6 pb-0 mb-0 border-t border-slate-800/80 text-center space-y-1">
+        <p className="text-xs sm:text-sm font-mono text-slate-400">
+          © {new Date().getFullYear()} <span className="text-cyan-400 font-semibold">Md. Saidur Rahman Sohan</span>. All rights reserved.
+        </p>
+        <p className="text-[11px] text-slate-500 font-mono">
+          Designed & Built with React.js & Tailwind CSS
+        </p>
       </footer>
     </section>
   );
