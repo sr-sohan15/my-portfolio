@@ -1,79 +1,114 @@
 import React, { useState } from 'react';
-import { Menu, X, FileText } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 
-// 🔴 প্রপস হিসেবে onOpenResume রিসিভ করা হলো
-export default function NavbarLight({ onOpenResume }) {
+const NavbarLight = ({ openResume }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: 'About', href: '#' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Research', href: '#research' },
+    { name: "About", href: "#about" },
+    { name: "Skills", href: "#skills" },
+    { name: "Projects", href: "#projects" },
+    { name: "Research", href: "#research" },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-40 bg-white/80 backdrop-blur-md border-b border-slate-200 transition-colors duration-300">
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200 shadow-sm">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 h-16 flex items-center justify-between">
         
-        {/* Logo */}
-        <a href="#" className="text-xl font-mono font-bold text-slate-900 tracking-tight">
-          sohan<span className="text-sky-600">.dev</span>
+        {/* Brand */}
+        <a href="#about" className="text-xl font-bold font-mono tracking-tight text-slate-900 group flex items-center">
+          <span>sohan</span>
+          <span className="text-sky-600 group-hover:text-blue-500 transition-colors">.dev</span>
         </a>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6 text-sm font-mono text-slate-700 font-bold">
-          {navLinks.map((link) => (
-            <a key={link.name} href={link.href} className="hover:text-sky-600 transition">
-              {link.name}
-            </a>
-          ))}
-          
-          <a
-            href="#contact"
-            className="px-4 py-2 bg-sky-600 text-white rounded-lg text-xs font-bold transition shadow-sm hover:bg-sky-500"
-          >
-            Contact
-          </a>
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-8">
+          <div className="flex items-center gap-6">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-slate-600 hover:text-sky-600 transition-colors duration-200"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
 
-          {/* 🚀 Bouncing Resume Button (App.jsx এর মোডাল ওপেন করবে) */}
-          <button
-            onClick={onOpenResume}
-            className="animate-bounce flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded-full shadow-md shadow-sky-600/30 transition"
-          >
-            <FileText size={14} />
-            <span>Resume</span>
-          </button>
+          <div className="flex items-center gap-4 pl-2 border-l border-slate-200">
+            <a
+              href="#contact"
+              className="px-4 py-1.5 rounded-lg border border-sky-300 text-sky-700 hover:bg-sky-50 text-xs font-semibold transition duration-200"
+            >
+              Contact
+            </a>
+
+            {/* Desktop Light Glow Button */}
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-sky-400 to-blue-500 rounded-xl blur-md opacity-35 group-hover:opacity-75 transition duration-500"></div>
+
+              <button
+                type="button"
+                onClick={openResume}
+                className="relative flex items-center gap-2 px-4 py-1.5 rounded-lg bg-white border border-sky-400 text-sky-700 font-mono text-xs font-bold shadow-sm group-hover:bg-sky-50 transition-all duration-300 active:scale-95 cursor-pointer overflow-hidden"
+              >
+                <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-sky-300/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></span>
+
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-600"></span>
+                </span>
+
+                <span className="tracking-wide">Resume</span>
+                <ArrowUpRight size={13} className="text-sky-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Mobile Right Icons */}
-        <div className="flex items-center gap-3 md:hidden">
-          <button
-            onClick={onOpenResume}
-            className="animate-bounce flex items-center gap-1 px-3 py-1 bg-sky-600 text-white font-bold text-xs rounded-full"
-          >
-            <FileText size={12} />
-            <span>Resume</span>
-          </button>
+        {/* Mobile Header Actions */}
+        <div className="flex md:hidden items-center gap-3">
+          
+          {/* Mobile Ultra-Dynamic Glowing Resume Pill */}
+          <div className="relative group">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-sky-400 to-blue-500 rounded-lg blur-xs opacity-50 animate-pulse"></div>
+            
+            <button
+              type="button"
+              onClick={openResume}
+              className="relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/90 border border-sky-400/80 text-sky-700 font-mono text-xs font-bold shadow-sm active:scale-90 transition-transform cursor-pointer overflow-hidden backdrop-blur-md"
+            >
+              <span className="absolute inset-0 -translate-x-full animate-[shimmer_2.5s_infinite] bg-gradient-to-r from-transparent via-sky-300/20 to-transparent"></span>
 
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-600"></span>
+              </span>
+              
+              <span className="tracking-wide">Resume</span>
+              <ArrowUpRight size={12} className="text-sky-600" />
+            </button>
+          </div>
+
+          {/* Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-slate-800 hover:text-sky-600 focus:outline-none"
+            className="p-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 active:scale-95 transition-transform cursor-pointer"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="md:hidden bg-white/95 border-b border-slate-200 px-6 py-4 space-y-4 font-mono text-sm font-bold">
+        <div className="md:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-3 shadow-lg">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="block text-slate-800 hover:text-sky-600 transition"
+              className="block text-sm font-medium text-slate-700 hover:text-sky-600 py-1"
             >
               {link.name}
             </a>
@@ -81,7 +116,7 @@ export default function NavbarLight({ onOpenResume }) {
           <a
             href="#contact"
             onClick={() => setIsOpen(false)}
-            className="block text-center py-2 bg-sky-600 text-white rounded-lg text-xs font-bold"
+            className="block text-center mt-2 px-4 py-2 rounded-lg bg-sky-50 border border-sky-300 text-sky-700 text-xs font-semibold"
           >
             Contact
           </a>
@@ -89,4 +124,6 @@ export default function NavbarLight({ onOpenResume }) {
       )}
     </nav>
   );
-}
+};
+
+export default NavbarLight;

@@ -1,74 +1,119 @@
-import React, { useState } from 'react';
-import { Code2, Terminal, Cpu, Layers, Sparkles } from 'lucide-react';
-import { motion } from 'framer-motion';
-
-const SkillCard = ({ title, items, color, hoverBorder, hoverShadow, icon: Icon }) => {
-  const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setTilt({ 
-      rx: ((y - rect.height / 2) / (rect.height / 2)) * -8, 
-      ry: ((x - rect.width / 2) / (rect.width / 2)) * 8
-    });
-  };
-
-  return (
-    <motion.div
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => setTilt({ rx: 0, ry: 0 })}
-      style={{
-        transform: `perspective(1000px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
-        transition: tilt.rx === 0 ? 'transform 0.5s ease-out' : 'none'
-      }}
-      className={`relative p-6 bg-white/80 border border-slate-200 rounded-xl space-y-4 transition-all duration-300 shadow-md ${hoverBorder} ${hoverShadow} group cursor-pointer`}
-    >
-      <div className="flex items-center justify-between border-b border-slate-200 pb-2">
-        <h3 className={`text-lg font-bold ${color} flex items-center gap-2`}>{title}</h3>
-        <Icon size={18} className={`${color}`} />
-      </div>
-
-      <div className="flex flex-wrap gap-2 pt-1">
-        {items.map((s, i) => (
-          <span
-            key={i}
-            className="px-3 py-1 bg-slate-100 border border-slate-300 text-xs rounded-md text-slate-800 font-mono font-bold hover:border-sky-500 transition duration-200 cursor-default"
-          >
-            {s}
-          </span>
-        ))}
-      </div>
-    </motion.div>
-  );
-};
+import React from 'react';
+import { 
+  Code2, 
+  Layout, 
+  Database, 
+  Terminal, 
+  BrainCircuit, 
+  Wrench, 
+  Cloud 
+} from 'lucide-react';
 
 const SkillsLight = () => {
   const skillCategories = [
-    { title: "Frontend", items: ["React.js", "JavaScript (ES6+)", "Tailwind CSS", "HTML5", "CSS3", "Bootstrap", "Responsive UI/UX"], color: "text-sky-600", hoverBorder: "hover:border-sky-500", hoverShadow: "hover:shadow-sky-500/10", icon: Layers },
-    { title: "Currently Learning", items: ["Next.js", "Node.js", "Express.js", "REST APIs"], color: "text-emerald-600", hoverBorder: "hover:border-emerald-500", hoverShadow: "hover:shadow-emerald-500/10", icon: Sparkles },
-    { title: "Academic Core", items: ["C", "C++", "Java", "Python", "MySQL"], color: "text-purple-600", hoverBorder: "hover:border-purple-500", hoverShadow: "hover:shadow-purple-500/10", icon: Cpu },
-    { title: "Tools & OS", items: ["Linux / Terminal", "Git & GitHub", "VS Code", "Postman"], color: "text-amber-600", hoverBorder: "hover:border-amber-500", hoverShadow: "hover:shadow-amber-500/10", icon: Terminal }
+    {
+      title: "Frontend Development",
+      icon: Layout,
+      borderColor: "hover:border-cyan-500",
+      glowColor: "hover:shadow-[0_10px_30px_rgba(6,182,212,0.15)]",
+      iconBg: "bg-cyan-50 text-cyan-600 border-cyan-200",
+      dotColor: "bg-cyan-500",
+      skills: ["React.js", "Next.js", "JavaScript (ES6+)", "TypeScript", "Tailwind CSS", "HTML5/CSS3", "Framer Motion"]
+    },
+    {
+      title: "Backend & Database",
+      icon: Database,
+      borderColor: "hover:border-emerald-500",
+      glowColor: "hover:shadow-[0_10px_30px_rgba(16,185,129,0.15)]",
+      iconBg: "bg-emerald-50 text-emerald-600 border-emerald-200",
+      dotColor: "bg-emerald-500",
+      skills: ["Node.js", "Express.js", "MongoDB", "PostgreSQL", "Firebase Admin", "RESTful APIs"]
+    },
+    {
+      title: "Core & Languages",
+      icon: Terminal,
+      borderColor: "hover:border-amber-500",
+      glowColor: "hover:shadow-[0_10px_30px_rgba(245,158,11,0.15)]",
+      iconBg: "bg-amber-50 text-amber-600 border-amber-200",
+      dotColor: "bg-amber-500",
+      skills: ["C++", "Java", "Python", "Data Structures", "Algorithms", "OOP"]
+    },
+    {
+      title: "Research & Analysis",
+      icon: BrainCircuit,
+      borderColor: "hover:border-purple-500",
+      glowColor: "hover:shadow-[0_10px_30px_rgba(168,85,247,0.15)]",
+      iconBg: "bg-purple-50 text-purple-600 border-purple-200",
+      dotColor: "bg-purple-500",
+      skills: ["Research Design & Analysis", "Machine Learning", "Supervised Learning", "Ensemble Models"]
+    },
+    {
+      title: "Cloud & Deployment",
+      icon: Cloud,
+      borderColor: "hover:border-blue-500",
+      glowColor: "hover:shadow-[0_10px_30px_rgba(59,130,246,0.15)]",
+      iconBg: "bg-blue-50 text-blue-600 border-blue-200",
+      dotColor: "bg-blue-500",
+      skills: ["Firebase Hosting", "Vercel", "Netlify", "GitHub Pages", "Linux / CLI", "Render"]
+    },
+    {
+      title: "Tools & Methods",
+      icon: Wrench,
+      borderColor: "hover:border-rose-500",
+      glowColor: "hover:shadow-[0_10px_30px_rgba(244,63,94,0.15)]",
+      iconBg: "bg-rose-50 text-rose-600 border-rose-200",
+      dotColor: "bg-rose-500",
+      skills: ["Git & GitHub", "VS Code", "Vite", "Postman", "System Design & Planning", "Team Collaboration"]
+    }
   ];
 
   return (
-    <section id="skills" className="py-20 px-6 border-y border-slate-200/80 transition-colors duration-500 bg-transparent">
-      <div className="max-w-6xl mx-auto space-y-12">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2 text-sky-600 text-sm font-mono font-bold">
-            <Code2 size={18} /> Technical Expertise
-          </div>
-          <h2 className="text-3xl font-black text-slate-900">
-            Skills & Technologies
-          </h2>
+    <section id="skills" className="pt-6 md:pt-10 pb-6 md:pb-10 px-6 max-w-6xl mx-auto space-y-6 md:space-y-8">
+      <div className="space-y-2">
+        <div className="flex items-center gap-2 text-sky-600 text-sm font-mono font-medium">
+          <Code2 size={18} /> Technical Expertise
         </div>
+        <h2 className="text-3xl font-bold text-slate-900 flex items-center gap-2">
+          Skills & Stack
+        </h2>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillCategories.map((cat) => (
-            <SkillCard key={cat.title} {...cat} />
-          ))}
-        </div>
+      {/* Symmetrical 3x2 Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {skillCategories.map((cat, idx) => {
+          const Icon = cat.icon;
+          return (
+            <div
+              key={idx}
+              className={`group relative rounded-2xl bg-white border border-slate-200/90 shadow-sm p-6 transition-all duration-300 ${cat.borderColor} ${cat.glowColor} hover:-translate-y-1 backdrop-blur-sm flex flex-col justify-between`}
+            >
+              <div>
+                {/* Card Header */}
+                <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+                  <h3 className="font-semibold text-slate-800 text-base tracking-wide flex items-center gap-2">
+                    {cat.title}
+                  </h3>
+                  <div className={`p-2 rounded-xl border ${cat.iconBg} group-hover:scale-110 transition duration-300`}>
+                    <Icon size={18} />
+                  </div>
+                </div>
+
+                {/* Skill Pills */}
+                <div className="flex flex-wrap gap-2">
+                  {cat.skills.map((skill, sIdx) => (
+                    <span
+                      key={sIdx}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-slate-700 bg-slate-50 border border-slate-200 hover:border-slate-300 hover:text-slate-900 hover:bg-slate-100 hover:scale-105 transition-all duration-200 cursor-default"
+                    >
+                      <span className={`w-1.5 h-1.5 rounded-full ${cat.dotColor}`}></span>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

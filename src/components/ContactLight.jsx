@@ -16,13 +16,11 @@ const ContactLight = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-        {/* 👈 বাম দিকের ডিরেক্ট ইনফো */}
         <div className="lg:col-span-5 space-y-6">
           <p className="text-slate-700 text-sm leading-relaxed font-medium">
             I am currently looking for <span className="text-sky-700 font-bold">Internship</span> or <span className="text-sky-700 font-bold">Junior Frontend Developer</span> opportunities. Feel free to reach out if you have a project or a position available!
           </p>
 
-          {/* Direct Email Card */}
           <div className="p-4 bg-white/80 border border-slate-200 rounded-xl space-y-2 shadow-sm">
             <span className="text-xs text-slate-500 font-mono font-bold block">Direct Email</span>
             <a href="mailto:sr.sohan5187@gmail.com" className="text-slate-900 hover:text-sky-600 font-mono text-sm font-bold transition block">
@@ -30,7 +28,6 @@ const ContactLight = () => {
             </a>
           </div>
 
-          {/* LinkedIn Card */}
           <div className="p-4 bg-white/80 border border-slate-200 rounded-xl space-y-2 shadow-sm">
             <span className="text-xs text-slate-500 font-mono font-bold block">Professional Network</span>
             <a 
@@ -46,9 +43,8 @@ const ContactLight = () => {
             </a>
           </div>
 
-          {/* WhatsApp Card */}
           <div className="p-4 bg-white/80 border border-slate-200 rounded-xl space-y-2 shadow-sm">
-            <span className="text-xs text-slate-500 font-mono font-bold block">WhatsApp (Emergency)</span>
+            <span className="text-xs text-slate-500 font-mono font-bold block">WhatsApp</span>
             <a 
               href="https://wa.me/8801724247815" 
               target="_blank" 
@@ -61,7 +57,6 @@ const ContactLight = () => {
           </div>
         </div>
 
-        {/* 👉 ডান দিকের কন্টাক্ট ফর্ম */}
         <form 
           ref={formRef} 
           className="lg:col-span-7 space-y-4 p-6 bg-white/80 border border-slate-200 rounded-xl shadow-sm relative"
