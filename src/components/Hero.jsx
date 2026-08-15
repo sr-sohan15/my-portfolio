@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 const Hero = () => {
-  const roles = ["Software Engineer", "React Specialist", "Frontend Developer", "Full-Stack Developer", "UI/UX Craftsman"];
+  const roles = [
+    "MERN Stack Developer",
+    "Full-Stack Developer",
+    "React Specialist",
+    "Frontend Engineer",
+    "UI/UX Craftsman"
+  ];
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -30,13 +36,13 @@ const Hero = () => {
   }, [displayedText, isDeleting, roleIndex]);
 
   return (
-   <section id="about" className="pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-4 md:pb-6 px-6 max-w-6xl mx-auto">
+    <section id="about" className="pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-4 md:pb-6 px-6 max-w-6xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
         
         {/* Left Content */}
         <div className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
           
-          {/* Mobile-Only Avatar: Bigger & Perfectly Proportioned */}
+          {/* Mobile-Only Avatar */}
           <div className="md:hidden pt-2 flex justify-center">
             <div 
               className="relative group cursor-pointer"
@@ -72,9 +78,9 @@ const Hero = () => {
           </div>
 
           {/* Mature & Impact-Driven Bio Description */}
-          <p className="max-w-lg text-slate-400 text-xs sm:text-sm leading-relaxed">
-            CSE Graduate specializing in building fast, scalable, and responsive web applications using <strong className="text-slate-200">React.js</strong>, <strong className="text-slate-200">Next.js</strong>, and modern frontend architectures. Passionate about writing clean, maintainable code, optimizing user experience, and developing full-stack solutions.
-          </p>
+        <p className="max-w-lg text-slate-400 text-xs sm:text-sm leading-relaxed">
+  CSE Graduate & <strong className="text-slate-200">Frontend-focused MERN Stack Developer</strong> specializing in building fast, scalable, and responsive web applications using <strong className="text-slate-200">React.js</strong>, <strong className="text-slate-200">Next.js</strong>, and modern frontend architectures. Passionate about writing clean, maintainable code, optimizing user experience, and leveraging <strong className="text-slate-200">AI-assisted workflows</strong> to build robust, high-performance solutions.
+</p>
 
           <div className="flex items-center gap-3 pt-2">
             <a 
