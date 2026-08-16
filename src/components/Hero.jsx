@@ -113,20 +113,22 @@ const Hero = () => {
             CSE Graduate & <strong className="text-slate-200">Frontend-focused MERN Stack Developer</strong> specializing in building fast, scalable, and responsive web applications using <strong className="text-slate-200">React.js</strong>, <strong className="text-slate-200">Next.js</strong>, and modern frontend architectures. Passionate about writing clean, maintainable code, optimizing user experience, and leveraging <strong className="text-slate-200">AI-assisted workflows</strong> to build robust, high-performance solutions.
           </p>
 
-          {/* Responsive Impact Metrics Bar (Fixed Mobile Conflict) */}
+          {/* Responsive Impact Metrics Bar */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 w-full max-w-lg pt-1">
             {quickStats.map((stat, idx) => {
               const Icon = stat.icon;
               return (
                 <div 
                   key={idx} 
-                  className="p-3 sm:p-2.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center justify-between sm:flex-col sm:items-start sm:justify-start gap-2 shadow-sm backdrop-blur-sm"
+                  className="p-3 sm:p-2.5 rounded-xl bg-slate-900/60 border border-slate-800 flex flex-col items-start gap-1 shadow-sm backdrop-blur-sm"
                 >
-                  <div className="flex items-center gap-2 text-xs text-slate-400 font-mono">
+                  <div className="flex items-center gap-1.5 text-xs text-slate-400 font-mono">
                     <Icon size={14} className={stat.color} />
                     <span>{stat.label}</span>
                   </div>
-                  <span className="text-xs sm:text-sm font-bold font-mono text-slate-100">{stat.value}</span>
+                  <span className="text-xs sm:text-sm font-semibold font-sans text-slate-100 pl-5 tracking-wide">
+                    {stat.value}
+                  </span>
                 </div>
               );
             })}

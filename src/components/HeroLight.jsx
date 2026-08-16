@@ -114,7 +114,7 @@ const HeroLight = () => {
               return (
                 <div 
                   key={idx} 
-                  className="p-3 sm:p-2.5 rounded-xl bg-white border border-slate-200/90 flex items-center justify-between sm:flex-col sm:items-start sm:justify-start gap-2 shadow-xs backdrop-blur-sm"
+                  className="p-3 sm:p-2.5 rounded-xl bg-white border border-slate-200/90 flex flex-col items-start gap-1 shadow-xs backdrop-blur-sm"
                 >
                   <div className="flex items-center gap-2 text-xs text-slate-600 font-mono">
                     <div className={`p-1 rounded-md ${stat.bg}`}>
@@ -122,7 +122,9 @@ const HeroLight = () => {
                     </div>
                     <span>{stat.label}</span>
                   </div>
-                  <span className="text-xs sm:text-sm font-bold font-mono text-slate-900">{stat.value}</span>
+                  <span className="text-xs sm:text-sm font-semibold font-sans text-slate-900 pl-6 tracking-wide">
+                    {stat.value}
+                  </span>
                 </div>
               );
             })}

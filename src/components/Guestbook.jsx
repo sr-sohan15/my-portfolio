@@ -17,7 +17,7 @@ const ROLE_OPTIONS = [
 
 const FILTER_TABS = ["All", "Recruiter / HR", "Software Engineer", "Client / Founder", "Top Liked"];
 
-// টাইমজোন টু কান্ট্রি কোড অফলাইন ডিকশনারি
+// টাইমজোন থেকে কান্ট্রি কোড অফলাইন ডিকশনারি
 const detectCountryByTimezone = () => {
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
@@ -47,7 +47,7 @@ const detectCountryByTimezone = () => {
   }
 };
 
-// মিনিমাল সিন্থেসাইজড সাউন্ড ইঞ্জিন
+// মিনিমাল সাউন্ড ইঞ্জিন
 const playBeepSound = (type = 'click', isMuted = false) => {
   if (isMuted) return;
   try {
@@ -594,14 +594,28 @@ const Guestbook = ({ isDarkMode = true }) => {
             }`}
           >
             {filteredNotes.length === 0 ? (
-              <div className={`text-center py-12 md:py-16 px-4 border border-dashed rounded-2xl flex flex-col items-center justify-center space-y-2 ${
-                isDarkMode ? 'text-slate-400 border-slate-800 bg-slate-900/20' : 'text-slate-400 border-slate-200 bg-slate-50'
+              <div className={`text-center py-12 md:py-16 px-4 border border-dashed rounded-2xl flex flex-col items-center justify-center space-y-2.5 ${
+                isDarkMode 
+                  ? 'border-slate-800 bg-slate-900/20' 
+                  : 'border-slate-300 bg-slate-50/80 shadow-xs'
               }`}>
-                <div className="p-3 bg-cyan-950/40 rounded-full border border-cyan-500/20 text-cyan-400">
+                <div className={`p-3 rounded-full border ${
+                  isDarkMode 
+                    ? 'bg-cyan-950/40 border-cyan-500/20 text-cyan-400' 
+                    : 'bg-sky-100 border-sky-300 text-sky-600'
+                }`}>
                   <MessageSquare size={20} />
                 </div>
-                <p className="text-xs font-mono font-bold text-slate-200">No notes found in this category</p>
-                <p className="text-[11px] text-slate-400">Be the first to leave a message! 🚀</p>
+                <p className={`text-xs font-mono font-bold ${
+                  isDarkMode ? 'text-slate-200' : 'text-slate-800'
+                }`}>
+                  No notes found in this category
+                </p>
+                <p className={`text-[11px] font-sans ${
+                  isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                }`}>
+                  Be the first to leave a message! 🚀
+                </p>
               </div>
             ) : (
               filteredNotes.map((note) => {
