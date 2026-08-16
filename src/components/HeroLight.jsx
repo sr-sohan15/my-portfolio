@@ -64,17 +64,17 @@ const HeroLight = () => {
   ];
 
   return (
-    <section id="about" className="pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-4 md:pb-6 px-6 max-w-6xl mx-auto">
+    <section id="about" className="pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-4 md:pb-6 px-4 sm:px-6 max-w-6xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
         
         {/* Left Content */}
-        <div className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left space-y-5">
+        <div className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left space-y-5 w-full">
           
-          {/* Mobile-Only Avatar (Always Full Color) */}
+          {/* Mobile-Only Avatar */}
           <div className="md:hidden pt-2 pb-1 flex justify-center">
             <div className="relative group">
               <div className="absolute -inset-2 bg-gradient-to-r from-sky-400 to-cyan-400 rounded-full blur-lg opacity-40"></div>
-              <div className="relative w-48 h-48 sm:w-52 sm:h-52 rounded-full overflow-hidden border-2 border-sky-400 bg-white shadow-xl">
+              <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full overflow-hidden border-2 border-sky-400 bg-white shadow-xl">
                 <img 
                   src={`${import.meta.env.BASE_URL}sohan.jpeg`} 
                   alt="Md. Saidur Rahman Sohan" 
@@ -107,20 +107,20 @@ const HeroLight = () => {
             CSE Graduate & <strong className="text-slate-800">Frontend-focused MERN Stack Developer</strong> specializing in building fast, scalable, and responsive web applications using <strong className="text-slate-800">React.js</strong>, <strong className="text-slate-800">Next.js</strong>, and modern frontend architectures. Passionate about writing clean, maintainable code, optimizing user experience, and leveraging <strong className="text-slate-800">AI-assisted workflows</strong> to build robust, high-performance solutions.
           </p>
 
-          {/* Dynamic Impact Metrics Bar */}
-          <div className="grid grid-cols-3 gap-3 w-full max-w-lg pt-1">
+          {/* Responsive Impact Metrics Bar */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 w-full max-w-lg pt-1">
             {quickStats.map((stat, idx) => {
               const Icon = stat.icon;
               return (
                 <div 
                   key={idx} 
-                  className="p-2.5 rounded-xl bg-white border border-slate-200/90 flex flex-col items-center md:items-start space-y-1 shadow-sm backdrop-blur-sm"
+                  className="p-3 sm:p-2.5 rounded-xl bg-white border border-slate-200/90 flex items-center justify-between sm:flex-col sm:items-start sm:justify-start gap-2 shadow-xs backdrop-blur-sm"
                 >
-                  <div className="flex items-center gap-1.5 text-xs text-slate-600 font-mono">
+                  <div className="flex items-center gap-2 text-xs text-slate-600 font-mono">
                     <div className={`p-1 rounded-md ${stat.bg}`}>
-                      <Icon size={12} className={stat.color} />
+                      <Icon size={13} className={stat.color} />
                     </div>
-                    <span className="truncate">{stat.label}</span>
+                    <span>{stat.label}</span>
                   </div>
                   <span className="text-xs sm:text-sm font-bold font-mono text-slate-900">{stat.value}</span>
                 </div>
@@ -129,7 +129,7 @@ const HeroLight = () => {
           </div>
 
           {/* Call to Actions */}
-          <div className="flex items-center gap-3 pt-2">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3 pt-2 w-full">
             <a 
               href="#contact" 
               className="px-5 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs transition active:scale-95 shadow-md shadow-sky-500/20"
@@ -174,7 +174,6 @@ const HeroLight = () => {
                 alt="Md. Saidur Rahman Sohan" 
                 className="w-full h-full object-cover object-top hover:scale-105 transition duration-500"
               />
-              {/* Subtle glass reflection */}
               <div className="absolute inset-0 bg-gradient-to-tr from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
             </div>
           </div>

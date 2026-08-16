@@ -65,11 +65,11 @@ const Hero = () => {
   ];
 
   return (
-    <section id="about" className="pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-4 md:pb-6 px-6 max-w-6xl mx-auto">
+    <section id="about" className="pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-4 md:pb-6 px-4 sm:px-6 max-w-6xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
         
         {/* Left Content */}
-        <div className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left space-y-5">
+        <div className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left space-y-5 w-full">
           
           {/* Mobile-Only Avatar */}
           <div className="md:hidden pt-2 pb-1 flex justify-center">
@@ -78,7 +78,7 @@ const Hero = () => {
               onClick={() => setIsColored(!isColored)}
             >
               <div className={`absolute -inset-2 bg-gradient-to-r from-cyan-500 to-sky-500 rounded-full blur-lg transition duration-500 ${isColored ? 'opacity-85 scale-105' : 'opacity-55'}`}></div>
-              <div className="relative w-48 h-48 sm:w-52 sm:h-52 rounded-full overflow-hidden border-2 border-cyan-400/80 bg-slate-900 shadow-2xl active:scale-95 transition duration-200">
+              <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full overflow-hidden border-2 border-cyan-400/80 bg-slate-900 shadow-2xl active:scale-95 transition duration-200">
                 <img 
                   src={`${import.meta.env.BASE_URL}sohan.jpeg`} 
                   alt="Md. Saidur Rahman Sohan" 
@@ -113,18 +113,18 @@ const Hero = () => {
             CSE Graduate & <strong className="text-slate-200">Frontend-focused MERN Stack Developer</strong> specializing in building fast, scalable, and responsive web applications using <strong className="text-slate-200">React.js</strong>, <strong className="text-slate-200">Next.js</strong>, and modern frontend architectures. Passionate about writing clean, maintainable code, optimizing user experience, and leveraging <strong className="text-slate-200">AI-assisted workflows</strong> to build robust, high-performance solutions.
           </p>
 
-          {/* Dynamic Impact Metrics Bar */}
-          <div className="grid grid-cols-3 gap-3 w-full max-w-lg pt-1">
+          {/* Responsive Impact Metrics Bar (Fixed Mobile Conflict) */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 w-full max-w-lg pt-1">
             {quickStats.map((stat, idx) => {
               const Icon = stat.icon;
               return (
                 <div 
                   key={idx} 
-                  className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800 flex flex-col items-center md:items-start space-y-1 shadow-sm backdrop-blur-sm"
+                  className="p-3 sm:p-2.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center justify-between sm:flex-col sm:items-start sm:justify-start gap-2 shadow-sm backdrop-blur-sm"
                 >
-                  <div className="flex items-center gap-1.5 text-xs text-slate-400 font-mono">
-                    <Icon size={13} className={stat.color} />
-                    <span className="truncate">{stat.label}</span>
+                  <div className="flex items-center gap-2 text-xs text-slate-400 font-mono">
+                    <Icon size={14} className={stat.color} />
+                    <span>{stat.label}</span>
                   </div>
                   <span className="text-xs sm:text-sm font-bold font-mono text-slate-100">{stat.value}</span>
                 </div>
@@ -133,7 +133,7 @@ const Hero = () => {
           </div>
 
           {/* Call to Actions */}
-          <div className="flex items-center gap-3 pt-2">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3 pt-2 w-full">
             <a 
               href="#contact" 
               className="px-5 py-2.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs transition active:scale-95 shadow-md shadow-sky-500/20"
@@ -178,7 +178,6 @@ const Hero = () => {
                 alt="Md. Saidur Rahman Sohan" 
                 className="w-full h-full object-cover object-top grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 transition duration-500"
               />
-              {/* Subtle glass shimmer layer */}
               <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
             </div>
           </div>

@@ -39,7 +39,6 @@ const detectCountryByTimezone = () => {
     if (tz.includes("Riyadh")) return "sa";
     if (tz.includes("Kuala_Lumpur")) return "my";
     
-    // এশিয়া জোনের ডিফল্ট বাংলাদেশ
     if (tz.startsWith("Asia/")) return "bd";
 
     return "bd";
@@ -119,11 +118,9 @@ const Guestbook = ({ isDarkMode = true }) => {
     }
     setUserToken(token);
 
-    // কোনো এক্সটার্নাল এপিআই ছাড়া সরাসরি ডিভাইস টাইমজোন থেকে দেশ নির্ধারণ
     const detectedCountry = detectCountryByTimezone();
     setCountryCode(detectedCountry);
 
-    // ফায়ারবেস রিয়েল-টাইম লিসেনার
     const unsubscribe = onSnapshot(
       collection(db, "guestbook_notes"),
       (snapshot) => {
@@ -146,7 +143,7 @@ const Guestbook = ({ isDarkMode = true }) => {
     return () => unsubscribe();
   }, []);
 
-  // ভয়েস টু টেক্সট
+  // ভয়েস টু টেক্সট
   const handleVoiceInput = () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -229,7 +226,7 @@ const Guestbook = ({ isDarkMode = true }) => {
   const handleReplySubmit = async (noteId) => {
     if (!replyText.trim()) return;
     
-    const finalName = isAdmin ? "Author" : (replyName.trim() || "Peer Visitor");
+    const finalName = isAdmin ? "Sohan" : (replyName.trim() || "Peer Visitor");
     const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     const newReply = {
@@ -237,6 +234,7 @@ const Guestbook = ({ isDarkMode = true }) => {
       name: finalName,
       text: replyText.trim(),
       isOwner: isAdmin,
+      authorToken: userToken,
       displayDate: `Today at ${currentTime}`,
       timestamp: Date.now()
     };
@@ -255,7 +253,20 @@ const Guestbook = ({ isDarkMode = true }) => {
     }
   };
 
-  // স্মার্ট টগল রিয়্যাকশন হ্যান্ডলার
+  // থ্রেডেড রিপ্লাই ডিলিট ফাংশন
+  const handleDeleteReply = async (noteId, replyToDelete) => {
+    try {
+      const noteRef = doc(db, "guestbook_notes", noteId);
+      await updateDoc(noteRef, {
+        replies: arrayRemove(replyToDelete)
+      });
+      playBeepSound('click', isMuted);
+    } catch (err) {
+      console.error("Failed to delete reply:", err);
+    }
+  };
+
+  // স্মার্ট টগল রিয়্যাকশন হ্যান্ডলার
   const handleReaction = async (noteId, type, isAlreadyReacted) => {
     try {
       playBeepSound('reaction', isMuted);
@@ -785,29 +796,67 @@ const Guestbook = ({ isDarkMode = true }) => {
                           </button>
                         </div>
 
-                        {/* Nested Replies Thread */}
+                        {/* Nested Replies Thread with Delete Option */}
                         {repliesList.length > 0 && (
-                          <div className="mt-3 space-y-2 pl-3 border-l-2 border-slate-800">
+                          <div className={`mt-3 space-y-2 pl-3 border-l-2 ${
+                            isDarkMode ? 'border-slate-800' : 'border-sky-200'
+                          }`}>
                             {repliesList.map((reply) => {
+                              const isReplyAuthor = reply.authorToken === userToken;
+                              const canDeleteReply = isAdmin || isReplyAuthor;
+
                               return (
                                 <div 
                                   key={reply.id} 
                                   className={`p-2.5 rounded-lg text-xs font-sans border ${
                                     reply.isOwner 
-                                      ? isDarkMode ? 'bg-cyan-950/40 border-cyan-500/40 text-cyan-100' : 'bg-sky-50 border-sky-300 text-sky-900'
-                                      : isDarkMode ? 'bg-slate-950/60 border-slate-800/80 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
+                                      ? isDarkMode ? 'bg-cyan-950/40 border-cyan-500/40 text-cyan-100' : 'bg-sky-50 border-sky-300 text-sky-950 shadow-xs'
+                                      : isDarkMode ? 'bg-slate-950/60 border-slate-800/80 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-800'
                                   }`}
                                 >
                                   <div className="flex items-center justify-between mb-1">
                                     <div className="flex items-center gap-1.5">
-                                      <span className="font-bold font-mono text-[11px] text-slate-200">{reply.name}</span>
+                                      <span className={`font-bold font-mono text-[11px] ${
+                                        isDarkMode ? 'text-slate-200' : 'text-slate-900'
+                                      }`}>
+                                        {reply.name}
+                                      </span>
                                       {reply.isOwner && (
-                                        <span className="text-[9px] font-mono px-1 rounded bg-cyan-500 text-slate-950 font-bold">Author</span>
+                                        <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-cyan-500 text-slate-950 font-bold">
+                                          Author
+                                        </span>
+                                      )}
+                                      {!reply.isOwner && isReplyAuthor && (
+                                        <span className="text-[9px] font-mono px-1 rounded bg-slate-800 text-cyan-300">
+                                          You
+                                        </span>
                                       )}
                                     </div>
-                                    <span className="text-[10px] font-mono text-slate-500">{reply.displayDate}</span>
+                                    
+                                    <div className="flex items-center gap-1.5">
+                                      <span className={`text-[10px] font-mono ${
+                                        isDarkMode ? 'text-slate-500' : 'text-slate-600'
+                                      }`}>
+                                        {reply.displayDate}
+                                      </span>
+                                      {canDeleteReply && (
+                                        <button
+                                          onClick={() => handleDeleteReply(note.id, reply)}
+                                          className="text-slate-400 hover:text-rose-400 transition p-0.5 cursor-pointer"
+                                          title="Delete reply"
+                                        >
+                                          <Trash2 size={11} />
+                                        </button>
+                                      )}
+                                    </div>
                                   </div>
-                                  <p className="text-xs leading-normal">{reply.text}</p>
+                                  <p className={`text-xs leading-normal font-medium ${
+                                    reply.isOwner
+                                      ? isDarkMode ? 'text-cyan-100' : 'text-sky-950'
+                                      : isDarkMode ? 'text-slate-300' : 'text-slate-700'
+                                  }`}>
+                                    {reply.text}
+                                  </p>
                                 </div>
                               );
                             })}
@@ -829,7 +878,7 @@ const Guestbook = ({ isDarkMode = true }) => {
                             <div className="flex gap-2">
                               <input
                                 type="text"
-                                placeholder={isAdmin ? "Replying as Author..." : "Write a reply..."}
+                                placeholder={isAdmin ? "Replying as Author (Sohan)..." : "Write a reply..."}
                                 value={replyText}
                                 onChange={(e) => setReplyText(e.target.value)}
                                 onKeyDown={(e) => { if (e.key === 'Enter') handleReplySubmit(note.id); }}
