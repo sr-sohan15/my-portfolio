@@ -9,6 +9,7 @@ import Projects from './components/Projects';
 import ProjectsLight from './components/ProjectsLight';
 import Research from './components/Research';
 import ResearchLight from './components/ResearchLight';
+import Guestbook from './components/Guestbook';
 import Contact from './components/Contact';
 import ContactLight from './components/ContactLight';
 import Footer from './components/Footer';
@@ -18,7 +19,7 @@ import SmartSpaceBackground from './components/SmartSpaceBackground';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
-  // সুরক্ষিত থিম লোডার (JSON.parse এরর হ্যান্ডলিং সহ)
+  // সুরক্ষিত থিম লোডার
   const [isDarkMode, setIsDarkMode] = useState(() => {
     try {
       const savedTheme = localStorage.getItem('portfolio-theme');
@@ -70,6 +71,7 @@ function App() {
               <Skills />
               <Projects />
               <Research />
+              <Guestbook isDarkMode={isDarkMode} />
               <Contact />
             </main>
           </>
@@ -81,6 +83,7 @@ function App() {
               <SkillsLight />
               <ProjectsLight />
               <ResearchLight />
+              <Guestbook isDarkMode={isDarkMode} />
               <ContactLight />
             </main>
           </>

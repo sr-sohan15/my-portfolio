@@ -4,6 +4,7 @@ import { Menu, X, ArrowUpRight } from 'lucide-react';
 const Navbar = ({ openResume }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const navLinks = [
     { name: "About", href: "#about", id: "about" },
@@ -12,8 +13,17 @@ const Navbar = ({ openResume }) => {
     { name: "Research", href: "#research", id: "research" },
   ];
 
-  // ScrollSpy: ব্যবহারকারী কোন সেকশনে আছেন তা স্বয়ংক্রিয়ভাবে ট্র্যাক করা
+  // ScrollSpy এবং ডায়নামিক স্ক্রল প্রগ্রেস ট্র্যাকিং
   useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scroll = `${(totalScroll / windowHeight) * 100}`;
+      setScrollProgress(scroll);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
     const sectionIds = ['about', 'skills', 'projects', 'research', 'contact'];
     
     const observerOptions = {
@@ -36,11 +46,21 @@ const Navbar = ({ openResume }) => {
       if (el) observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#030712]/80 backdrop-blur-md border-b border-slate-800/80">
+      
+      {/* Dynamic Top Scroll Progress Bar */}
+      <div 
+        className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-cyan-500 via-sky-400 to-cyan-300 transition-all duration-150 z-50 shadow-[0_0_8px_rgba(6,182,212,0.8)]"
+        style={{ width: `${scrollProgress}%` }}
+      />
+
       <div className="max-w-6xl mx-auto px-5 sm:px-6 h-16 flex items-center justify-between">
         
         {/* Brand */}
@@ -112,7 +132,7 @@ const Navbar = ({ openResume }) => {
         {/* Mobile Header Actions */}
         <div className="flex md:hidden items-center gap-3">
           
-          {/* Mobile Ultra-Dynamic Glowing Resume Pill */}
+          {/* Mobile Glowing Resume Pill */}
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-sky-500 rounded-lg blur-xs opacity-75 animate-pulse"></div>
             
