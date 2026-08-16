@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, MessageSquare } from 'lucide-react';
 
 const NavbarLight = ({ openResume }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,8 +12,42 @@ const NavbarLight = ({ openResume }) => {
     { name: "Research", href: "#research", id: "research" },
   ];
 
+  // নাইট মোডের মতো সেইম সফট ভেসে ওঠার ট্রানজিশন হ্যান্ডলার
+  const scrollToSection = (e, id) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (!element) return;
+
+    setIsOpen(false);
+
+    const navHeight = 70;
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = Math.max(0, elementPosition - navHeight);
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'auto'
+    });
+
+    element.style.transition = 'none';
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(16px)';
+
+    void element.offsetHeight;
+
+    element.style.transition = 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+    element.style.opacity = '1';
+    element.style.transform = 'translateY(0)';
+
+    setTimeout(() => {
+      element.style.transition = '';
+      element.style.transform = '';
+      element.style.opacity = '';
+    }, 450);
+  };
+
   useEffect(() => {
-    const sectionIds = ['about', 'skills', 'projects', 'research', 'contact'];
+    const sectionIds = ['about', 'skills', 'projects', 'research', 'guestbook', 'contact'];
     const observerOptions = {
       root: null,
       rootMargin: '-20% 0px -60% 0px',
@@ -42,7 +76,11 @@ const NavbarLight = ({ openResume }) => {
       <div className="max-w-6xl mx-auto px-5 sm:px-6 h-16 flex items-center justify-between">
         
         {/* Brand */}
-        <a href="#about" className="text-xl font-bold font-mono tracking-tight text-slate-900 group flex items-center">
+        <a 
+          href="#about" 
+          onClick={(e) => scrollToSection(e, 'about')}
+          className="text-xl font-bold font-mono tracking-tight text-slate-900 group flex items-center cursor-pointer"
+        >
           <span>sohan</span>
           <span className="text-sky-600 group-hover:text-cyan-500 transition-colors">.dev</span>
         </a>
@@ -56,7 +94,8 @@ const NavbarLight = ({ openResume }) => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`text-sm font-medium transition-all duration-200 relative py-1 ${
+                  onClick={(e) => scrollToSection(e, link.id)}
+                  className={`text-sm font-medium transition-all duration-200 relative py-1 cursor-pointer ${
                     isActive
                       ? 'text-sky-600 font-bold drop-shadow-sm'
                       : 'text-slate-600 hover:text-sky-600'
@@ -71,12 +110,28 @@ const NavbarLight = ({ openResume }) => {
             })}
           </div>
 
-          <div className="flex items-center gap-4 pl-2 border-l border-slate-200">
+          <div className="flex items-center gap-3 pl-2 border-l border-slate-200">
+            {/* Desktop Guestbook Button */}
+            <a
+              href="#guestbook"
+              onClick={(e) => scrollToSection(e, 'guestbook')}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border text-xs font-semibold font-mono transition duration-200 active:scale-95 cursor-pointer ${
+                activeSection === 'guestbook'
+                  ? 'border-sky-500 bg-sky-50 text-sky-700 shadow-sm font-bold'
+                  : 'border-slate-200 bg-slate-50 text-slate-700 hover:text-sky-600 hover:border-slate-300'
+              }`}
+            >
+              <MessageSquare size={13} className="text-sky-600" />
+              Guestbook
+            </a>
+
+            {/* Desktop Contact Button */}
             <a
               href="#contact"
-              className={`px-4 py-1.5 rounded-lg border text-xs font-semibold transition duration-200 ${
+              onClick={(e) => scrollToSection(e, 'contact')}
+              className={`px-3.5 py-1.5 rounded-lg border text-xs font-semibold transition duration-200 active:scale-95 cursor-pointer ${
                 activeSection === 'contact'
-                  ? 'border-sky-500 bg-sky-50 text-sky-700 shadow-sm'
+                  ? 'border-sky-500 bg-sky-50 text-sky-700 shadow-sm font-bold'
                   : 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-sky-400'
               }`}
             >
@@ -137,8 +192,8 @@ const NavbarLight = ({ openResume }) => {
               <a
                 key={link.name}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`block text-sm font-medium py-1 transition-colors ${
+                onClick={(e) => scrollToSection(e, link.id)}
+                className={`block text-sm font-medium py-1 transition-colors cursor-pointer ${
                   isActive ? 'text-sky-600 font-bold pl-2 border-l-2 border-sky-600' : 'text-slate-600 hover:text-sky-600'
                 }`}
               >
@@ -146,17 +201,34 @@ const NavbarLight = ({ openResume }) => {
               </a>
             );
           })}
-          <a
-            href="#contact"
-            onClick={() => setIsOpen(false)}
-            className={`block text-center mt-2 px-4 py-2 rounded-lg text-xs font-semibold transition ${
-              activeSection === 'contact'
-                ? 'bg-sky-600 text-white font-bold'
-                : 'bg-sky-50 border border-sky-200 text-sky-700'
-            }`}
-          >
-            Contact
-          </a>
+
+          {/* Mobile Menu Guestbook & Contact */}
+          <div className="pt-2 flex flex-col gap-2">
+            <a
+              href="#guestbook"
+              onClick={(e) => scrollToSection(e, 'guestbook')}
+              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold font-mono border transition cursor-pointer ${
+                activeSection === 'guestbook'
+                  ? 'bg-sky-100 border-sky-400 text-sky-800 font-bold'
+                  : 'bg-slate-50 border-slate-200 text-slate-700'
+              }`}
+            >
+              <MessageSquare size={13} className="text-sky-600" />
+              Guestbook
+            </a>
+
+            <a
+              href="#contact"
+              onClick={(e) => scrollToSection(e, 'contact')}
+              className={`block text-center px-4 py-2 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                activeSection === 'contact'
+                  ? 'bg-sky-600 text-white font-bold'
+                  : 'bg-sky-50 border border-sky-200 text-sky-700'
+              }`}
+            >
+              Contact
+            </a>
+          </div>
         </div>
       )}
     </nav>
