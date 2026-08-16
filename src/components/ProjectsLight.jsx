@@ -118,12 +118,13 @@ const ProjectsLight = () => {
               </div>
             </div>
 
+            {/* Desktop Image Container (Always Full Color) */}
             <div className="hidden lg:flex lg:col-span-6 items-center justify-center">
               <div className="w-full h-full min-h-[300px] rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-md group">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover object-top grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 group-hover:scale-105 transition duration-500"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
                 />
               </div>
             </div>

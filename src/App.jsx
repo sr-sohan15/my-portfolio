@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import NavbarLight from './components/NavbarLight';
 import Hero from './components/Hero';
@@ -11,21 +11,43 @@ import Research from './components/Research';
 import ResearchLight from './components/ResearchLight';
 import Contact from './components/Contact';
 import ContactLight from './components/ContactLight';
+import Footer from './components/Footer';
 import ThemeConfigurator from './components/ThemeConfigurator';
 import ResumeModal from './components/ResumeModal';
 import SmartSpaceBackground from './components/SmartSpaceBackground';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  // সুরক্ষিত থিম লোডার (JSON.parse এরর হ্যান্ডলিং সহ)
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    try {
+      const savedTheme = localStorage.getItem('portfolio-theme');
+      if (savedTheme === null) return true;
+      if (savedTheme === 'light') return false;
+      if (savedTheme === 'dark') return true;
+      return JSON.parse(savedTheme);
+    } catch {
+      return true;
+    }
+  });
+
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   const toggleTheme = () => {
-    setIsDarkMode((prev) => !prev);
+    setIsDarkMode((prev) => {
+      const nextTheme = !prev;
+      localStorage.setItem('portfolio-theme', JSON.stringify(nextTheme));
+      return nextTheme;
+    });
   };
 
   const handleOpenResume = () => {
     setIsResumeOpen(true);
   };
+
+  useEffect(() => {
+    document.title = "Md. Saidur Rahman Sohan | Portfolio";
+  }, []);
 
   return (
     <div
@@ -39,11 +61,11 @@ function App() {
       <SmartSpaceBackground isDarkMode={isDarkMode} />
 
       {/* Main Foreground Content Layer */}
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col min-h-screen justify-between">
         {isDarkMode ? (
           <>
             <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} openResume={handleOpenResume} />
-            <main className="space-y-6 md:space-y-10 pb-16">
+            <main className="space-y-6 md:space-y-10 pb-6 flex-grow">
               <Hero />
               <Skills />
               <Projects />
@@ -54,7 +76,7 @@ function App() {
         ) : (
           <>
             <NavbarLight isDarkMode={isDarkMode} toggleTheme={toggleTheme} openResume={handleOpenResume} />
-            <main className="space-y-6 md:space-y-10 pb-16">
+            <main className="space-y-6 md:space-y-10 pb-6 flex-grow">
               <HeroLight />
               <SkillsLight />
               <ProjectsLight />
@@ -63,7 +85,13 @@ function App() {
             </main>
           </>
         )}
+
+        {/* Global Unified Footer */}
+        <Footer isDarkMode={isDarkMode} />
       </div>
+
+      {/* Floating Back to Top Button */}
+      <ScrollToTop isDarkMode={isDarkMode} />
 
       {/* Floating Theme Switcher */}
       <ThemeConfigurator isDarkMode={isDarkMode} toggleTheme={toggleTheme} />

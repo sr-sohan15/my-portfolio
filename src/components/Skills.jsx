@@ -1,119 +1,83 @@
 import React from 'react';
-import { 
-  Code2, 
-  Layout, 
-  Database, 
-  Terminal, 
-  BrainCircuit, 
-  Wrench, 
-  Cloud 
-} from 'lucide-react';
+import { Code2, Layout, Database, Wrench, Layers } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
     {
-      title: "Frontend Development",
-      icon: Layout,
-      borderColor: "hover:border-cyan-500/50",
-      glowColor: "group-hover:shadow-[0_0_25px_rgba(6,182,212,0.15)]",
-      iconBg: "bg-cyan-950/60 text-cyan-400 border-cyan-500/30",
-      dotColor: "bg-cyan-400",
-      skills: ["React.js", "Next.js", "JavaScript (ES6+)", "TypeScript", "Tailwind CSS", "HTML5/CSS3", "Framer Motion"]
+      category: "Frontend Core",
+      icon: <Layout size={18} className="text-cyan-400" />,
+      skills: [
+        { name: "React.js", tooltip: "Component Architecture, Hooks, Context" },
+        { name: "Next.js", tooltip: "App Router, SSR, Performance Optimization" },
+        { name: "JavaScript (ES6+)", tooltip: "Async/Await, Closures, DOM Manipulation" },
+        { name: "Tailwind CSS", tooltip: "Responsive Layouts, Custom Design Tokens" },
+        { name: "HTML5 / CSS3", tooltip: "Semantic Web, Modern Flexbox & Grid" }
+      ]
     },
     {
-      title: "Backend & Database",
-      icon: Database,
-      borderColor: "hover:border-emerald-500/50",
-      glowColor: "group-hover:shadow-[0_0_25px_rgba(16,185,129,0.15)]",
-      iconBg: "bg-emerald-950/60 text-emerald-400 border-emerald-500/30",
-      dotColor: "bg-emerald-400",
-      skills: ["Node.js", "Express.js", "MongoDB", "PostgreSQL", "Firebase Admin", "RESTful APIs"]
+      category: "Backend & Database",
+      icon: <Database size={18} className="text-cyan-400" />,
+      skills: [
+        { name: "Node.js", tooltip: "REST API Server & Middleware Architecture" },
+        { name: "Express.js", tooltip: "Routing, Authentication, API Controllers" },
+        { name: "MongoDB", tooltip: "Aggregation, Mongoose Schemas, Indexing" },
+        { name: "Firebase Auth", tooltip: "Social OAuth, JWT Token Validation" }
+      ]
     },
     {
-      title: "Core & Languages",
-      icon: Terminal,
-      borderColor: "hover:border-amber-500/50",
-      glowColor: "group-hover:shadow-[0_0_25px_rgba(245,158,11,0.15)]",
-      iconBg: "bg-amber-950/60 text-amber-400 border-amber-500/30",
-      dotColor: "bg-amber-400",
-      skills: ["C++", "Java", "Python", "Data Structures", "Algorithms", "OOP"]
-    },
-    {
-      title: "Research & Analysis",
-      icon: BrainCircuit,
-      borderColor: "hover:border-purple-500/50",
-      glowColor: "group-hover:shadow-[0_0_25px_rgba(168,85,247,0.15)]",
-      iconBg: "bg-purple-950/60 text-purple-400 border-purple-500/30",
-      dotColor: "bg-purple-400",
-      skills: ["Research Design & Analysis", "Machine Learning", "Supervised Learning", "Ensemble Models"]
-    },
-    {
-      title: "Cloud & Deployment",
-      icon: Cloud,
-      borderColor: "hover:border-blue-500/50",
-      glowColor: "group-hover:shadow-[0_0_25px_rgba(59,130,246,0.15)]",
-      iconBg: "bg-blue-950/60 text-blue-400 border-blue-500/30",
-      dotColor: "bg-blue-400",
-      skills: ["Firebase Hosting", "Vercel", "Netlify", "GitHub Pages", "Linux / CLI", "Render"]
-    },
-    {
-      title: "Tools & Methods",
-      icon: Wrench,
-      borderColor: "hover:border-rose-500/50",
-      glowColor: "group-hover:shadow-[0_0_25px_rgba(244,63,94,0.15)]",
-      iconBg: "bg-rose-950/60 text-rose-400 border-rose-500/30",
-      dotColor: "bg-rose-400",
-      skills: ["Git & GitHub", "VS Code", "Vite", "Postman", "System Design & Planning", "Team Collaboration"]
+      category: "Tools & Methodologies",
+      icon: <Wrench size={18} className="text-cyan-400" />,
+      skills: [
+        { name: "Git & GitHub", tooltip: "Branching Strategies, CI/CD Actions" },
+        { name: "Postman", tooltip: "API Testing & Documentation" },
+        { name: "Vite / Webpack", tooltip: "Fast Bundling & Build Configuration" },
+        { name: "VS Code", tooltip: "Custom Workflows, AI-Assisted Tooling" }
+      ]
     }
   ];
 
   return (
-    <section id="skills" className="pt-6 md:pt-10 pb-6 md:pb-10 px-6 max-w-6xl mx-auto space-y-6 md:space-y-8">
+    <section id="skills" className="pt-6 md:pt-12 pb-6 md:pb-10 px-6 max-w-6xl mx-auto space-y-6 md:space-y-10">
       <div className="space-y-2">
-        <div className="flex items-center gap-2 text-sky-400 text-sm font-mono">
+        <div className="flex items-center gap-2 text-cyan-400 text-sm font-mono font-semibold">
           <Code2 size={18} /> Technical Expertise
         </div>
-        <h2 className="text-3xl font-bold text-slate-100 flex items-center gap-2">
+        <h2 className="text-3xl font-bold text-slate-100">
           Skills & Stack
         </h2>
       </div>
 
-      {/* Symmetrical 3x2 Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {skillCategories.map((cat, idx) => {
-          const Icon = cat.icon;
-          return (
-            <div
-              key={idx}
-              className={`group relative rounded-2xl bg-slate-900/60 border border-slate-800/90 p-6 transition-all duration-300 ${cat.borderColor} ${cat.glowColor} hover:-translate-y-1 backdrop-blur-sm flex flex-col justify-between`}
-            >
-              <div>
-                {/* Card Header */}
-                <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-800/80">
-                  <h3 className="font-semibold text-slate-200 text-base tracking-wide flex items-center gap-2">
-                    {cat.title}
-                  </h3>
-                  <div className={`p-2 rounded-xl border ${cat.iconBg} group-hover:scale-110 transition duration-300`}>
-                    <Icon size={18} />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {skillCategories.map((cat, idx) => (
+          <div
+            key={idx}
+            className="p-6 bg-slate-900/40 border border-slate-800/80 rounded-2xl space-y-4 hover:border-cyan-500/40 transition duration-300 shadow-lg backdrop-blur-sm"
+          >
+            <div className="flex items-center gap-2.5 pb-2 border-b border-slate-800">
+              {cat.icon}
+              <h3 className="text-base font-bold text-slate-200">{cat.category}</h3>
+            </div>
+
+            <div className="flex flex-wrap gap-2 pt-1">
+              {cat.skills.map((skill, sIdx) => (
+                <div key={sIdx} className="relative group cursor-pointer">
+                  {/* Skill Badge */}
+                  <span className="inline-block px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 group-hover:border-cyan-500/60 group-hover:text-cyan-300 text-xs font-mono transition">
+                    {skill.name}
+                  </span>
+
+                  {/* Dynamic Floating Tooltip */}
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:flex flex-col items-center z-30 pointer-events-none whitespace-nowrap">
+                    <span className="px-2.5 py-1 bg-slate-950 border border-cyan-500/50 text-[11px] font-mono text-cyan-200 rounded-md shadow-xl backdrop-blur-md">
+                      {skill.tooltip}
+                    </span>
+                    <div className="w-2 h-2 bg-slate-950 border-r border-b border-cyan-500/50 transform rotate-45 -mt-1"></div>
                   </div>
                 </div>
-
-                {/* Skill Pills */}
-                <div className="flex flex-wrap gap-2">
-                  {cat.skills.map((skill, sIdx) => (
-                    <span
-                      key={sIdx}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-slate-300 bg-slate-950/80 border border-slate-800/90 hover:border-slate-700 hover:text-slate-100 hover:bg-slate-900 hover:scale-105 transition-all duration-200 cursor-default"
-                    >
-                      <span className={`w-1.5 h-1.5 rounded-full ${cat.dotColor} opacity-70 group-hover:opacity-100`}></span>
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </section>
   );

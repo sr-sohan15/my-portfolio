@@ -77,7 +77,7 @@ const Hero = () => {
             </p>
           </div>
 
-          {/* Mature & Impact-Driven Bio Description */}
+          {/* Bio Description */}
           <p className="max-w-lg text-slate-400 text-xs sm:text-sm leading-relaxed">
             CSE Graduate & <strong className="text-slate-200">Frontend-focused MERN Stack Developer</strong> specializing in building fast, scalable, and responsive web applications using <strong className="text-slate-200">React.js</strong>, <strong className="text-slate-200">Next.js</strong>, and modern frontend architectures. Passionate about writing clean, maintainable code, optimizing user experience, and leveraging <strong className="text-slate-200">AI-assisted workflows</strong> to build robust, high-performance solutions.
           </p>
@@ -108,7 +108,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Desktop Image */}
+        {/* Desktop Image (Night B&W -> Hover Color) */}
         <div className="hidden md:flex md:col-span-5 justify-center md:justify-end">
           <div className="relative group">
             <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 to-sky-500 rounded-3xl blur-xl opacity-30 group-hover:opacity-60 transition duration-500"></div>

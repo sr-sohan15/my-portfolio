@@ -1,15 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
 const Navbar = ({ openResume }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('about');
 
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Research", href: "#research" },
+    { name: "About", href: "#about", id: "about" },
+    { name: "Skills", href: "#skills", id: "skills" },
+    { name: "Projects", href: "#projects", id: "projects" },
+    { name: "Research", href: "#research", id: "research" },
   ];
+
+  // ScrollSpy: ব্যবহারকারী কোন সেকশনে আছেন তা স্বয়ংক্রিয়ভাবে ট্র্যাক করা
+  useEffect(() => {
+    const sectionIds = ['about', 'skills', 'projects', 'research', 'contact'];
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#030712]/80 backdrop-blur-md border-b border-slate-800/80">
@@ -24,21 +52,36 @@ const Navbar = ({ openResume }) => {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
           <div className="flex items-center gap-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-slate-400 hover:text-cyan-400 transition-colors duration-200"
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className={`text-sm font-medium transition-all duration-200 relative py-1 ${
+                    isActive
+                      ? 'text-cyan-400 font-semibold drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]'
+                      : 'text-slate-400 hover:text-cyan-400'
+                  }`}
+                >
+                  {link.name}
+                  {/* Active Underline Indicator */}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-cyan-400 to-sky-400 rounded-full animate-in fade-in duration-300"></span>
+                  )}
+                </a>
+              );
+            })}
           </div>
 
           <div className="flex items-center gap-4 pl-2 border-l border-slate-800">
             <a
               href="#contact"
-              className="px-4 py-1.5 rounded-lg border border-cyan-500/30 text-cyan-400 hover:bg-cyan-950/40 hover:border-cyan-400 text-xs font-semibold transition duration-200"
+              className={`px-4 py-1.5 rounded-lg border text-xs font-semibold transition duration-200 ${
+                activeSection === 'contact'
+                  ? 'border-cyan-400 bg-cyan-950/60 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.3)]'
+                  : 'border-cyan-500/30 text-cyan-400 hover:bg-cyan-950/40 hover:border-cyan-400'
+              }`}
             >
               Contact
             </a>
@@ -78,10 +121,8 @@ const Navbar = ({ openResume }) => {
               onClick={openResume}
               className="relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950/90 border border-cyan-400/60 text-cyan-300 font-mono text-xs font-bold shadow-[0_0_12px_rgba(6,182,212,0.3)] active:scale-90 transition-transform cursor-pointer overflow-hidden backdrop-blur-md"
             >
-              {/* Continuous Light Shimmer across mobile button */}
               <span className="absolute inset-0 -translate-x-full animate-[shimmer_2.5s_infinite] bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent"></span>
 
-              {/* Live Status Radar Dot */}
               <span className="relative flex h-2 w-2 shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
@@ -104,21 +145,30 @@ const Navbar = ({ openResume }) => {
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="md:hidden bg-slate-950 border-b border-slate-800 px-6 py-4 space-y-3">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="block text-sm font-medium text-slate-300 hover:text-cyan-400 py-1"
-            >
-              {link.name}
-            </a>
-          ))}
+        <div className="md:hidden bg-slate-950/95 border-b border-slate-800 px-6 py-4 space-y-3 backdrop-blur-xl">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`block text-sm font-medium py-1 transition-colors ${
+                  isActive ? 'text-cyan-400 font-bold pl-2 border-l-2 border-cyan-400' : 'text-slate-300 hover:text-cyan-400'
+                }`}
+              >
+                {link.name}
+              </a>
+            );
+          })}
           <a
             href="#contact"
             onClick={() => setIsOpen(false)}
-            className="block text-center mt-2 px-4 py-2 rounded-lg bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-semibold"
+            className={`block text-center mt-2 px-4 py-2 rounded-lg text-xs font-semibold transition ${
+              activeSection === 'contact'
+                ? 'bg-cyan-500 text-slate-950 font-bold'
+                : 'bg-cyan-950/60 border border-cyan-500/30 text-cyan-400'
+            }`}
           >
             Contact
           </a>

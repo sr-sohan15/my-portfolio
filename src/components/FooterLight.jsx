@@ -41,7 +41,7 @@ const HeroLight = () => {
         {/* Left Content */}
         <div className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
           
-          {/* Mobile-Only Avatar (Always Full Color) */}
+          {/* Mobile Avatar (Original Full Color) */}
           <div className="md:hidden pt-2 pb-1 flex justify-center">
             <div className="relative group">
               <div className="absolute -inset-2 bg-gradient-to-r from-sky-400 to-cyan-400 rounded-full blur-lg opacity-40"></div>
@@ -49,7 +49,7 @@ const HeroLight = () => {
                 <img 
                   src={`${import.meta.env.BASE_URL}sohan.jpeg`} 
                   alt="Md. Saidur Rahman Sohan" 
-                  className="w-full h-full object-cover object-top scale-110"
+                  className="w-full h-full object-cover object-top scale-110 grayscale-0 filter-none contrast-100"
                 />
               </div>
             </div>
@@ -102,7 +102,7 @@ const HeroLight = () => {
           </div>
         </div>
 
-        {/* Desktop Image (Always Full Color) */}
+        {/* Desktop Image (Original Full Color) */}
         <div className="hidden md:flex md:col-span-5 justify-center md:justify-end">
           <div className="relative group">
             <div className="absolute -inset-1.5 bg-gradient-to-r from-sky-400 to-cyan-400 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
@@ -110,7 +110,7 @@ const HeroLight = () => {
               <img 
                 src={`${import.meta.env.BASE_URL}sohan.jpeg`} 
                 alt="Md. Saidur Rahman Sohan" 
-                className="w-full h-full object-cover object-top hover:scale-105 transition duration-500"
+                className="w-full h-full object-cover object-top grayscale-0 filter-none contrast-100 hover:scale-105 transition duration-500"
               />
             </div>
           </div>
