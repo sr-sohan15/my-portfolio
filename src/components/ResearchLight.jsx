@@ -29,7 +29,7 @@ const ResearchLight = () => {
       ],
       image:
         "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
-      paperUrl: "https://ieeexplore.ieee.org",
+      paperUrl: "https://ieeexplore.ieee.org/document/11546158",
     },
   ];
 
@@ -39,7 +39,7 @@ const ResearchLight = () => {
       className="pt-6 md:pt-12 pb-6 md:pb-10 px-6 max-w-6xl mx-auto space-y-6 md:space-y-10"
     >
       <div className="space-y-2">
-        <div className="flex items-center gap-2 text-sky-600 text-sm font-mono">
+        <div className="flex items-center gap-2 text-sky-600 text-sm font-mono font-semibold">
           <BookOpen size={18} /> Research & Publications
         </div>
         <h2 className="text-3xl font-bold text-slate-900">
@@ -51,18 +51,18 @@ const ResearchLight = () => {
         {publications.map((pub, idx) => (
           <div
             key={idx}
-            className="rounded-2xl bg-white border border-slate-200 overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 lg:p-8 hover:border-sky-400 transition duration-300 shadow-xl"
+            className="rounded-2xl bg-white/90 border border-slate-200 overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 lg:p-8 hover:border-sky-400/60 transition duration-300 shadow-xl backdrop-blur-sm"
           >
             <div className="col-span-1 lg:col-span-7 space-y-5 flex flex-col justify-between">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-sky-100 border border-sky-300 text-sky-800 text-xs font-mono">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-sky-50 border border-sky-200 text-sky-700 text-xs font-mono font-medium">
                   <Award size={14} />
                   <span>
                     {pub.publisher} • {pub.conference}
                   </span>
                 </div>
 
-                <h3 className="text-xl lg:text-2xl font-bold text-slate-900 leading-snug">
+                <h3 className="text-xl lg:text-2xl font-bold text-slate-800 leading-snug">
                   {pub.title}
                 </h3>
 
@@ -85,7 +85,7 @@ const ResearchLight = () => {
                     >
                       <CheckCircle2
                         size={15}
-                        className="text-emerald-500 shrink-0 mt-0.5"
+                        className="text-emerald-600 shrink-0 mt-0.5"
                       />
                       <span>{item}</span>
                     </div>
@@ -96,7 +96,7 @@ const ResearchLight = () => {
                   {pub.tags.map((tag, tIdx) => (
                     <span
                       key={tIdx}
-                      className="px-2.5 py-1 text-xs font-mono bg-sky-50 text-sky-800 rounded-md border border-sky-200"
+                      className="px-2.5 py-1 text-xs font-mono bg-slate-100 text-slate-700 rounded-md border border-slate-200"
                     >
                       {tag}
                     </span>
@@ -104,12 +104,12 @@ const ResearchLight = () => {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-100">
+              <div className="pt-4 border-t border-slate-200">
                 <a
                   href={pub.paperUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs transition shadow-md shadow-sky-600/20 active:scale-95"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs transition shadow-md shadow-sky-500/20 active:scale-95"
                 >
                   <BookOpen size={14} />
                   <span>IEEE Xplore Paper</span>
@@ -119,11 +119,11 @@ const ResearchLight = () => {
             </div>
 
             <div className="hidden lg:flex lg:col-span-5 items-center justify-center">
-              <div className="w-full h-full min-h-[300px] rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-xl group">
+              <div className="w-full h-full min-h-[300px] rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-md group">
                 <img
                   src={pub.image}
                   alt={pub.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                  className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 group-hover:scale-105 transition duration-500"
                 />
               </div>
             </div>

@@ -25,7 +25,7 @@ const Projects = () => {
         "Team Collaboration",
       ],
       image: `${import.meta.env.BASE_URL}axymart.png`,
-      liveUrl: "https://axymart-sohan.web.app",
+      liveUrl: "https://axymart.com/",
       githubUrl: "https://github.com/sr-sohan15/axymart-client",
     },
   ];

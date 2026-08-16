@@ -43,13 +43,13 @@ const Hero = () => {
         <div className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
           
           {/* Mobile-Only Avatar */}
-          <div className="md:hidden pt-2 flex justify-center">
+          <div className="md:hidden pt-2 pb-1 flex justify-center">
             <div 
               className="relative group cursor-pointer"
               onClick={() => setIsColored(!isColored)}
             >
               <div className={`absolute -inset-2 bg-gradient-to-r from-cyan-500 to-sky-500 rounded-full blur-lg transition duration-500 ${isColored ? 'opacity-85 scale-105' : 'opacity-55'}`}></div>
-              <div className="relative w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden border-2 border-cyan-400/80 bg-slate-900 shadow-2xl active:scale-95 transition duration-200">
+              <div className="relative w-48 h-48 sm:w-52 sm:h-52 rounded-full overflow-hidden border-2 border-cyan-400/80 bg-slate-900 shadow-2xl active:scale-95 transition duration-200">
                 <img 
                   src={`${import.meta.env.BASE_URL}sohan.jpeg`} 
                   alt="Md. Saidur Rahman Sohan" 
@@ -78,9 +78,9 @@ const Hero = () => {
           </div>
 
           {/* Mature & Impact-Driven Bio Description */}
-        <p className="max-w-lg text-slate-400 text-xs sm:text-sm leading-relaxed">
-  CSE Graduate & <strong className="text-slate-200">Frontend-focused MERN Stack Developer</strong> specializing in building fast, scalable, and responsive web applications using <strong className="text-slate-200">React.js</strong>, <strong className="text-slate-200">Next.js</strong>, and modern frontend architectures. Passionate about writing clean, maintainable code, optimizing user experience, and leveraging <strong className="text-slate-200">AI-assisted workflows</strong> to build robust, high-performance solutions.
-</p>
+          <p className="max-w-lg text-slate-400 text-xs sm:text-sm leading-relaxed">
+            CSE Graduate & <strong className="text-slate-200">Frontend-focused MERN Stack Developer</strong> specializing in building fast, scalable, and responsive web applications using <strong className="text-slate-200">React.js</strong>, <strong className="text-slate-200">Next.js</strong>, and modern frontend architectures. Passionate about writing clean, maintainable code, optimizing user experience, and leveraging <strong className="text-slate-200">AI-assisted workflows</strong> to build robust, high-performance solutions.
+          </p>
 
           <div className="flex items-center gap-3 pt-2">
             <a 

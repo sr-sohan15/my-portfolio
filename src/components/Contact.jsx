@@ -61,7 +61,7 @@ const Contact = () => {
           <div className="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-1">
             <span className="text-xs text-slate-500 font-mono block">Direct Email</span>
             <a href="mailto:sr.sohan5187@gmail.com" className="text-slate-200 hover:text-sky-400 font-mono text-sm transition block">
-              sr.sohan5187@gmail.com
+              sr.sohan7815@gmail.com
             </a>
           </div>
 
