@@ -13,6 +13,7 @@ Welcome to my personal portfolio repository! This is a modern, responsive, and f
 * **📄 Interactive Resume Modal:** In-app PDF resume viewer with animated status radar and direct download capabilities.
 * **🔬 Academic Research Showcase:** Dedicated section highlighting published IEEE conference research with direct digital library access.
 * **🌌 Smart Particle Space Canvas:** High-performance HTML5 Canvas background with dynamic cursor tracking, particle drift, and nebula ambient glows.
+* **⚡ Dynamic Global Footer:** Unified responsive footer with auto-updating copyright year (`new Date().getFullYear()`), live tech attribution, and quick back-to-top navigation.
 * **📱 Fully Responsive Design:** Clean, mobile-first responsive UI built with Tailwind CSS.
 
 ---
@@ -40,7 +41,7 @@ src/
 │   ├── Projects.jsx / ProjectsLight.jsx   # Featured Works, Tech Tags & Live Demo Links
 │   ├── Research.jsx / ResearchLight.jsx   # IEEE Publication Highlights & Direct Paper Links
 │   ├── Contact.jsx / ContactLight.jsx     # Web3Forms Integration & Click-to-Copy Actions
-│   ├── Footer.jsx / FooterLight.jsx       # Unified Global Footer & Social Badges
+│   ├── Footer.jsx / FooterLight.jsx       # Unified Global Footer with Dynamic Year & Quick Navigation
 │   ├── ScrollToTop.jsx                    # Floating Back-to-Top Navigation Button
 │   ├── ResumeModal.jsx                    # Interactive PDF Resume Viewer Modal
 │   ├── SmartSpaceBackground.jsx           # Dynamic Canvas Particle & Nebula Glow Layer
