@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Send, PhoneCall, Loader2, CheckCircle2, AlertCircle, Copy, Check } from 'lucide-react';
 
-const Contact = () => {
+const Contact = ({ isDarkMode = true }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -79,87 +79,137 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="pt-6 md:pt-10 pb-12 px-6 max-w-6xl mx-auto space-y-6 md:space-y-8">
-      <div className="space-y-2">
-        <div className="flex items-center gap-2 text-cyan-400 text-sm font-mono font-semibold">
-          <Mail size={18} /> Get In Touch
+    <section id="contact" className="pt-6 md:pt-10 pb-12 px-4 sm:px-6 max-w-6xl mx-auto space-y-6 md:space-y-8">
+      
+      {/* Header */}
+      <div className="space-y-2 border-b border-slate-200 dark:border-slate-800/80 pb-6">
+        <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-mono font-medium ${
+          isDarkMode 
+            ? 'bg-cyan-950/60 border-cyan-500/30 text-cyan-400' 
+            : 'bg-sky-100 border-sky-300 text-sky-800'
+        }`}>
+          <Mail size={16} /> Get In Touch
         </div>
-        <h2 className="text-3xl font-bold text-slate-100">
+        <h2 className={`text-3xl font-bold ${
+          isDarkMode ? 'text-slate-100' : 'text-slate-900'
+        }`}>
           Let's Connect
         </h2>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
         {/* Left Info Cards */}
         <div className="lg:col-span-5 space-y-4">
-          <p className="text-slate-300 text-sm leading-relaxed">
-            I am currently looking for <span className="text-cyan-400 font-semibold">Internship</span> or <span className="text-cyan-400 font-semibold">Junior Frontend Developer</span> opportunities. Feel free to reach out if you have a project or a position available!
+          <p className={`text-sm leading-relaxed ${
+            isDarkMode ? 'text-slate-300' : 'text-slate-700 font-medium'
+          }`}>
+            I am currently looking for <span className={`font-semibold ${isDarkMode ? 'text-cyan-400' : 'text-sky-600'}`}>Internship</span> or <span className={`font-semibold ${isDarkMode ? 'text-cyan-400' : 'text-sky-600'}`}>Junior Full-Stack / Frontend Developer</span> opportunities. Feel free to reach out if you have a project or a position available!
           </p>
 
-          {/* Email with Click-to-Copy */}
-          <div className="p-4 bg-slate-900/80 border border-slate-800 rounded-xl space-y-1.5 shadow-md flex items-center justify-between group">
+          {/* Email Card with Click-to-Copy */}
+          <div className={`p-4 border rounded-xl space-y-1.5 flex items-center justify-between group transition shadow-sm ${
+            isDarkMode 
+              ? 'bg-slate-900/80 border-slate-800 text-slate-100' 
+              : 'bg-white border-slate-200 text-slate-900 shadow-slate-200/50'
+          }`}>
             <div>
-              <span className="text-xs text-slate-400 font-mono font-medium block">Direct Email</span>
-              <a href="mailto:sr.sohan7815@gmail.com" className="text-slate-100 hover:text-cyan-400 font-mono text-sm font-semibold transition block">
+              <span className={`text-xs font-mono font-medium block ${
+                isDarkMode ? 'text-slate-400' : 'text-slate-500'
+              }`}>Direct Email</span>
+              <a href="mailto:sr.sohan7815@gmail.com" className={`font-mono text-sm font-semibold transition block ${
+                isDarkMode ? 'text-slate-100 hover:text-cyan-400' : 'text-slate-900 hover:text-sky-600'
+              }`}>
                 sr.sohan7815@gmail.com
               </a>
             </div>
             <button
               onClick={() => copyToClipboard('sr.sohan7815@gmail.com', 'email')}
-              className="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-cyan-400 transition"
+              className={`p-2 rounded-lg transition cursor-pointer ${
+                isDarkMode 
+                  ? 'bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-cyan-400' 
+                  : 'bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-sky-600'
+              }`}
               title="Copy Email"
             >
-              {copiedType === 'email' ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
+              {copiedType === 'email' ? <Check size={16} className="text-emerald-500" /> : <Copy size={16} />}
             </button>
           </div>
 
-          <div className="p-4 bg-slate-900/80 border border-slate-800 rounded-xl space-y-1.5 shadow-md">
-            <span className="text-xs text-slate-400 font-mono font-medium block">Professional Network</span>
+          {/* LinkedIn Network Card */}
+          <div className={`p-4 border rounded-xl space-y-1.5 shadow-sm ${
+            isDarkMode 
+              ? 'bg-slate-900/80 border-slate-800 text-slate-100' 
+              : 'bg-white border-slate-200 text-slate-900 shadow-slate-200/50'
+          }`}>
+            <span className={`text-xs font-mono font-medium block ${
+              isDarkMode ? 'text-slate-400' : 'text-slate-500'
+            }`}>Professional Network</span>
             <a 
               href="https://www.linkedin.com/in/sr-sohan15/" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-slate-100 hover:text-cyan-400 font-mono text-sm font-semibold transition flex items-center gap-2"
+              className={`font-mono text-sm font-semibold transition flex items-center gap-2 ${
+                isDarkMode ? 'text-slate-100 hover:text-cyan-400' : 'text-slate-900 hover:text-sky-600'
+              }`}
             >
-              <svg className="w-4 h-4 fill-cyan-400" viewBox="0 0 24 24">
+              <svg className={`w-4 h-4 ${isDarkMode ? 'fill-cyan-400' : 'fill-sky-600'}`} viewBox="0 0 24 24">
                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
               </svg>
               LinkedIn Profile
             </a>
           </div>
 
-          {/* WhatsApp with Click-to-Copy */}
-          <div className="p-4 bg-slate-900/80 border border-slate-800 rounded-xl space-y-1.5 shadow-md flex items-center justify-between group">
+          {/* WhatsApp Card with Click-to-Copy */}
+          <div className={`p-4 border rounded-xl space-y-1.5 flex items-center justify-between group transition shadow-sm ${
+            isDarkMode 
+              ? 'bg-slate-900/80 border-slate-800 text-slate-100' 
+              : 'bg-white border-slate-200 text-slate-900 shadow-slate-200/50'
+          }`}>
             <div>
-              <span className="text-xs text-slate-400 font-mono font-medium block">WhatsApp</span>
+              <span className={`text-xs font-mono font-medium block ${
+                isDarkMode ? 'text-slate-400' : 'text-slate-500'
+              }`}>WhatsApp</span>
               <a 
                 href="https://wa.me/8801724247815" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-slate-100 hover:text-emerald-400 font-mono text-sm font-semibold transition flex items-center gap-2"
+                className={`font-mono text-sm font-semibold transition flex items-center gap-2 ${
+                  isDarkMode ? 'text-slate-100 hover:text-emerald-400' : 'text-slate-900 hover:text-emerald-600'
+                }`}
               >
-                <PhoneCall size={16} className="text-emerald-400" />
+                <PhoneCall size={16} className="text-emerald-500" />
                 +880 1724-247815
               </a>
             </div>
             <button
               onClick={() => copyToClipboard('+8801724247815', 'phone')}
-              className="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-emerald-400 transition"
+              className={`p-2 rounded-lg transition cursor-pointer ${
+                isDarkMode 
+                  ? 'bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-emerald-400' 
+                  : 'bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-emerald-600'
+              }`}
               title="Copy Number"
             >
-              {copiedType === 'phone' ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
+              {copiedType === 'phone' ? <Check size={16} className="text-emerald-500" /> : <Copy size={16} />}
             </button>
           </div>
         </div>
 
-        {/* Form */}
+        {/* Form Container */}
         <form 
           onSubmit={handleSubmit}
-          className="lg:col-span-7 space-y-4 p-6 bg-slate-900/80 border border-slate-700/80 rounded-xl relative shadow-xl backdrop-blur-md"
+          className={`lg:col-span-7 space-y-4 p-6 border rounded-2xl relative shadow-xl backdrop-blur-md transition ${
+            isDarkMode 
+              ? 'bg-slate-900/80 border-slate-800' 
+              : 'bg-white border-slate-200 shadow-slate-200/60'
+          }`}
         >
           <div>
-            <label className="block text-xs font-mono font-semibold text-slate-200 mb-1.5">
-              Name <span className="text-cyan-400">*</span>
+            <label className={`block text-xs font-mono font-semibold mb-1.5 ${
+              isDarkMode ? 'text-slate-200' : 'text-slate-800'
+            }`}>
+              Name <span className={isDarkMode ? 'text-cyan-400' : 'text-sky-600'}>*</span>
             </label>
             <input 
               required
@@ -168,14 +218,20 @@ const Contact = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Your Name" 
-              className="w-full bg-slate-950/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition"
+              className={`w-full border rounded-xl px-4 py-2.5 text-sm transition focus:outline-none ${
+                isDarkMode 
+                  ? 'bg-slate-950/90 border-slate-700 text-slate-100 placeholder-slate-500 focus:border-cyan-400' 
+                  : 'bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-400 focus:border-sky-500'
+              }`}
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-mono font-semibold text-slate-200 mb-1.5">
-                Email <span className="text-cyan-400">*</span>
+              <label className={`block text-xs font-mono font-semibold mb-1.5 ${
+                isDarkMode ? 'text-slate-200' : 'text-slate-800'
+              }`}>
+                Email <span className={isDarkMode ? 'text-cyan-400' : 'text-sky-600'}>*</span>
               </label>
               <input 
                 required
@@ -184,11 +240,17 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="your@email.com" 
-                className="w-full bg-slate-950/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition"
+                className={`w-full border rounded-xl px-4 py-2.5 text-sm transition focus:outline-none ${
+                  isDarkMode 
+                    ? 'bg-slate-950/90 border-slate-700 text-slate-100 placeholder-slate-500 focus:border-cyan-400' 
+                    : 'bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-400 focus:border-sky-500'
+                }`}
               />
             </div>
             <div>
-              <label className="block text-xs font-mono font-semibold text-slate-200 mb-1.5">
+              <label className={`block text-xs font-mono font-semibold mb-1.5 ${
+                isDarkMode ? 'text-slate-200' : 'text-slate-800'
+              }`}>
                 Phone Number <span className="text-slate-400 text-[11px] font-normal">(Optional)</span>
               </label>
               <input 
@@ -197,14 +259,20 @@ const Contact = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="+880 1XXX-XXXXXX" 
-                className="w-full bg-slate-950/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition"
+                className={`w-full border rounded-xl px-4 py-2.5 text-sm transition focus:outline-none ${
+                  isDarkMode 
+                    ? 'bg-slate-950/90 border-slate-700 text-slate-100 placeholder-slate-500 focus:border-cyan-400' 
+                    : 'bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-400 focus:border-sky-500'
+                }`}
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-mono font-semibold text-slate-200 mb-1.5">
-              Message <span className="text-cyan-400">*</span> <span className="text-slate-400 text-[11px] font-normal">(Enter to send, Shift+Enter for newline)</span>
+            <label className={`block text-xs font-mono font-semibold mb-1.5 ${
+              isDarkMode ? 'text-slate-200' : 'text-slate-800'
+            }`}>
+              Message <span className={isDarkMode ? 'text-cyan-400' : 'text-sky-600'}>*</span> <span className="text-slate-400 text-[11px] font-normal">(Enter to send, Shift+Enter for newline)</span>
             </label>
             <textarea 
               required
@@ -214,32 +282,44 @@ const Contact = () => {
               onChange={handleChange}
               onKeyDown={handleKeyDown}
               placeholder="Write your message here..." 
-              className="w-full bg-slate-950/90 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition resize-none"
+              className={`w-full border rounded-xl px-4 py-2.5 text-sm transition resize-none focus:outline-none ${
+                isDarkMode 
+                  ? 'bg-slate-950/90 border-slate-700 text-slate-100 placeholder-slate-500 focus:border-cyan-400' 
+                  : 'bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-400 focus:border-sky-500'
+              }`}
             ></textarea>
           </div>
 
           <button 
             type="submit" 
             disabled={status.loading}
-            className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-400 hover:to-sky-400 disabled:opacity-50 text-slate-950 font-bold text-sm rounded-lg transition flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25 active:scale-95 cursor-pointer"
+            className={`w-full sm:w-auto px-6 py-2.5 font-bold text-sm rounded-xl transition flex items-center justify-center gap-2 shadow-lg active:scale-95 cursor-pointer disabled:opacity-50 ${
+              isDarkMode 
+                ? 'bg-gradient-to-r from-cyan-500 to-sky-500 text-slate-950 shadow-cyan-500/25' 
+                : 'bg-sky-600 hover:bg-sky-500 text-white shadow-sky-500/20'
+            }`}
           >
             {status.loading ? (
-              <>Sending <Loader2 size={16} className="animate-spin text-slate-950" /></>
+              <>Sending <Loader2 size={16} className="animate-spin" /></>
             ) : (
               <>Send Message <Send size={16} /></>
             )}
           </button>
 
           {status.success && (
-            <div className="flex items-center gap-2 text-xs font-mono text-emerald-300 bg-emerald-950/70 border border-emerald-500/50 p-3 rounded-lg animate-fadeIn">
-              <CheckCircle2 size={16} className="shrink-0 text-emerald-400" />
+            <div className={`flex items-center gap-2 text-xs font-mono p-3 rounded-xl border animate-fadeIn ${
+              isDarkMode ? 'text-emerald-300 bg-emerald-950/70 border-emerald-500/50' : 'text-emerald-800 bg-emerald-50 border-emerald-300'
+            }`}>
+              <CheckCircle2 size={16} className="shrink-0 text-emerald-500" />
               <span>Thank you! Your message has been sent successfully.</span>
             </div>
           )}
 
           {status.error && (
-            <div className="flex items-center gap-2 text-xs font-mono text-rose-300 bg-rose-950/70 border border-rose-500/50 p-3 rounded-lg animate-fadeIn">
-              <AlertCircle size={16} className="shrink-0 text-rose-400" />
+            <div className={`flex items-center gap-2 text-xs font-mono p-3 rounded-xl border animate-fadeIn ${
+              isDarkMode ? 'text-rose-300 bg-rose-950/70 border-rose-500/50' : 'text-rose-800 bg-rose-50 border-rose-300'
+            }`}>
+              <AlertCircle size={16} className="shrink-0 text-rose-500" />
               <span>{status.error}</span>
             </div>
           )}

@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
-import NavbarLight from './components/NavbarLight';
 import Hero from './components/Hero';
-import HeroLight from './components/HeroLight';
 import Skills from './components/Skills';
-import SkillsLight from './components/SkillsLight';
 import Projects from './components/Projects';
-import ProjectsLight from './components/ProjectsLight';
 import Research from './components/Research';
-import ResearchLight from './components/ResearchLight';
 import Guestbook from './components/Guestbook';
 import Contact from './components/Contact';
-import ContactLight from './components/ContactLight';
 import Footer from './components/Footer';
 import ThemeConfigurator from './components/ThemeConfigurator';
 import ResumeModal from './components/ResumeModal';
@@ -19,13 +13,13 @@ import SmartSpaceBackground from './components/SmartSpaceBackground';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
-  // সুরক্ষিত থিম লোডার
+  // সুরক্ষিত থিম লোডার (Light / Dark Mode State)
   const [isDarkMode, setIsDarkMode] = useState(() => {
     try {
       const savedTheme = localStorage.getItem('portfolio-theme');
-      if (savedTheme === null) return true;
-      if (savedTheme === 'light') return false;
-      if (savedTheme === 'dark') return true;
+      if (savedTheme === null) return true; // Default Dark Mode
+      if (savedTheme === 'light' || savedTheme === 'false') return false;
+      if (savedTheme === 'dark' || savedTheme === 'true') return true;
       return JSON.parse(savedTheme);
     } catch {
       return true;
@@ -37,7 +31,7 @@ function App() {
   const toggleTheme = () => {
     setIsDarkMode((prev) => {
       const nextTheme = !prev;
-      localStorage.setItem('portfolio-theme', JSON.stringify(nextTheme));
+      localStorage.setItem('portfolio-theme', nextTheme ? 'dark' : 'light');
       return nextTheme;
     });
   };
@@ -46,9 +40,26 @@ function App() {
     setIsResumeOpen(true);
   };
 
+  // পোর্টফোলিও ডকুমেন্ট টাইটেল
   useEffect(() => {
     document.title = "Md. Saidur Rahman Sohan | Portfolio";
   }, []);
+
+  // Tailwind Dark Mode Class & Mobile Meta Theme Color Sync
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDarkMode) {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+
+    // মোবাইল ব্রাউজার স্ট্যাটাস বার হেডার কালার সিঙ্ক
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', isDarkMode ? '#030712' : '#f8fafc');
+    }
+  }, [isDarkMode]);
 
   return (
     <div
@@ -63,31 +74,16 @@ function App() {
 
       {/* Main Foreground Content Layer */}
       <div className="relative z-10 flex flex-col min-h-screen justify-between">
-        {isDarkMode ? (
-          <>
-            <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} openResume={handleOpenResume} />
-            <main className="space-y-6 md:space-y-10 pb-6 flex-grow">
-              <Hero />
-              <Skills />
-              <Projects />
-              <Research />
-              <Guestbook isDarkMode={isDarkMode} />
-              <Contact />
-            </main>
-          </>
-        ) : (
-          <>
-            <NavbarLight isDarkMode={isDarkMode} toggleTheme={toggleTheme} openResume={handleOpenResume} />
-            <main className="space-y-6 md:space-y-10 pb-6 flex-grow">
-              <HeroLight />
-              <SkillsLight />
-              <ProjectsLight />
-              <ResearchLight />
-              <Guestbook isDarkMode={isDarkMode} />
-              <ContactLight />
-            </main>
-          </>
-        )}
+        <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} openResume={handleOpenResume} />
+
+        <main className="space-y-6 md:space-y-10 pb-6 flex-grow">
+          <Hero isDarkMode={isDarkMode} />
+          <Skills isDarkMode={isDarkMode} />
+          <Projects isDarkMode={isDarkMode} />
+          <Research isDarkMode={isDarkMode} />
+          <Guestbook isDarkMode={isDarkMode} />
+          <Contact isDarkMode={isDarkMode} />
+        </main>
 
         {/* Global Unified Footer */}
         <Footer isDarkMode={isDarkMode} />
@@ -100,7 +96,11 @@ function App() {
       <ThemeConfigurator isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
 
       {/* Resume Viewer Modal */}
-      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
+      <ResumeModal 
+        isOpen={isResumeOpen} 
+        onClose={() => setIsResumeOpen(false)} 
+        isDarkMode={isDarkMode}
+      />
     </div>
   );
 }
